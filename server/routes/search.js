@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../db');
+const SearchController = require('../controllers/SearchController');
 
-router.get('/', async (req, res) => {
-    const searchTerm = req.query.term;
-    const [results, fields] = await db.query('SELECT * FROM contents WHERE title LIKE ?', [`%${searchTerm}%`]);
-    res.json(results);
-});
+router.get('/', SearchController.search);
 
 module.exports = router;
