@@ -13,7 +13,6 @@ const HomePage = () => {
 
     return (
         <div>
-            <NavigationBar />
             <SearchBar />
             <ContentList contents={contents} />
             <Footer />
