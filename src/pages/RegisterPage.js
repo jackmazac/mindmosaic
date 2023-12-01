@@ -1,9 +1,9 @@
 import React from 'react';
 
-const LoginPage = () => {
+const RegisterPage = () => {
     return (
         <div>
-            <h1>Login</h1>
+            <h1>Register</h1>
             <form>
                 <label>
                     Username:
@@ -19,4 +19,4 @@ const LoginPage = () => {
     );
 }
 
-export default LoginPage;
+export default RegisterPage;
