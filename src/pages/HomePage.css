@@ -1,0 +1,44 @@
+body {
+    background-color: #121212;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    position: fixed;
+    background-color: #282828;
+    padding: 20px;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-left: 220px;
+    padding: 20px;
+}
+
+.content-card {
+    background-color: #383838;
+    padding: 20px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.content-card:hover {
+    transform: scale(1.05);
+}
+
+.content-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.content-card h2 {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #ffffff;
+}
