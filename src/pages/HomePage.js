@@ -1,4 +1,5 @@
 import React from 'react';
+import './HomePage.css';
 import NavigationBar from '../components/NavigationBar';
 import SearchBar from '../components/SearchBar';
 import ContentList from '../components/ContentList';
