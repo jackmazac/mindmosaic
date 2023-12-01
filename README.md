@@ -34,3 +34,15 @@ As per the project requirements, the back-end will be powered by MySQL. This dat
 - Database views and indexes will be utilized to optimize query performance and data retrieval.
 - All tables will enforce referential integrity with primary and foreign key constraints.
 - The database schema will be normalized to the 3rd normal form, and we will document all functional dependencies. 
+## Setup Instructions
+
+1. Clone the repository to your local machine.
+2. Navigate to the project directory.
+3. Install the required dependencies by running `npm install`.
+4. Start the server by running `npm start`.
+5. The server will start running on `http://localhost:5000`.
+6. To setup the database, navigate to the `database` directory.
+7. Run the `init.sql` file to create the database and tables.
+8. Run the `seed.sql` file to populate the tables with initial data.
+
+Note: Make sure you have Node.js and MySQL installed on your machine.
