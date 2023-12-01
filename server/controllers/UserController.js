@@ -11,6 +11,26 @@ const UserController = {
         });
     },
 
+    registerUser: function(req, res) {
+        UserModel.register(req.body, function(err, user) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.json(user);
+            }
+        });
+    },
+
+    loginUser: function(req, res) {
+        UserModel.login(req.body, function(err, user) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.json(user);
+            }
+        });
+    },
+
     getUserById: function(req, res) {
         UserModel.getById(req.params.id, function(err, user) {
             if (err) {

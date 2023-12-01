@@ -5,6 +5,22 @@ const User = {
         return db.query('SELECT * from users', callback);
     },
 
+    register: function(User, callback) {
+        return db.query(
+            'INSERT into users (username,password,email) values(?,?,?)',
+            [User.username, User.password, User.email],
+            callback
+        );
+    },
+
+    login: function(User, callback) {
+        return db.query(
+            'SELECT * from users where username=? and password=?',
+            [User.username, User.password],
+            callback
+        );
+    },
+
     getById: function(id, callback) {
         return db.query('SELECT * from users where id=?', [id], callback);
     },
