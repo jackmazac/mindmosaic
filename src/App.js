@@ -12,8 +12,18 @@ function App() {
 
   return (
     <div className="App">
+      import { Switch, Route } from 'react-router-dom';
+      import AboutPage from './pages/AboutPage';
+
       <NavigationBar />
-      <HomePage />
+      <Switch>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
+        <Route path="/about">
+          <AboutPage />
+        </Route>
+      </Switch>
       <Footer />
     </div>
   );
