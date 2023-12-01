@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# MindMosaic
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+MindMosaic is envisioned as a comprehensive digital platform that allows users to capture, categorize, and retrieve information across various media. It is designed to help users manage the plethora of content they interact with daily, including books, articles, podcasts, and videos. By leveraging a robust database and intuitive UI, MindMosaic serves as an intellectual tool that augments memory and facilitates the recall of information.
 
-## Available Scripts
+## Functionality
 
-In the project directory, you can run:
+The application will allow users to:
+- Automatically capture data from integrations with platforms such as YouTube, Spotify, and others.
+- Manage and query metadata associated with their content.
+- Conduct advanced searches with multiple parameters.
+- Interact with other users to compare and discuss content.
 
-### `npm start`
+## Front-End Technology
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+For the front-end UI, we plan to use React. React's component-based architecture will allow us to create a dynamic and responsive user interface. 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Back-End Database
 
-### `npm test`
+As per the project requirements, the back-end will be powered by MySQL. This database system will be used to store, manage, and retrieve all user data and interactions within the application.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Database Tables
 
-### `npm run build`
+- Users: Stores user account information.
+- Content_Interactions: Records each interaction a user has with content.
+- Content_Metadata: Holds metadata for each piece of content.
+- User_Preferences: Captures individual user settings and preferences.
+- Social_Interactions: Logs social interactions, such as discussions between users about content.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Additional Considerations
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- The application will include features for creating, reading, updating, and deleting records, with a soft-delete functionality for data retention policies.
+- We will implement transactions with commit and rollback to ensure data integrity.
+- Queries will be designed to include aggregation/group-by, subqueries, and multi-table joins to fulfill the project's requirements.
+- Database views and indexes will be utilized to optimize query performance and data retrieval.
+- All tables will enforce referential integrity with primary and foreign key constraints.
+- The database schema will be normalized to the 3rd normal form, and we will document all functional dependencies. 
