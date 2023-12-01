@@ -15,6 +15,7 @@ const HomePage = () => {
     return (
         <div>
             <SearchBar />
+            <p>MindMosaic is a platform that allows users to explore and interact with a variety of content in a unique and engaging way. Our goal is to provide a space where users can discover new ideas, connect with others, and express themselves creatively.</p>
             <ContentList contents={contents} />
             <Footer />
         </div>
