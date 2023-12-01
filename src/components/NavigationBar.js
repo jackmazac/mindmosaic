@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AboutPage from '../pages/AboutPage';
+import SearchBar from './SearchBar';
 
 const NavigationBar = () => {
     return (
@@ -10,6 +11,7 @@ const NavigationBar = () => {
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
             </ul>
+            <SearchBar />
         </nav>
     );
 }
