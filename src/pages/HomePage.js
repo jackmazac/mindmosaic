@@ -6,9 +6,9 @@ import Footer from '../components/Footer';
 
 const HomePage = () => {
     const contents = [
-        { title: 'Content 1', content: 'This is content 1' },
-        { title: 'Content 2', content: 'This is content 2' },
-        { title: 'Content 3', content: 'This is content 3' },
+        { title: 'MindMosaic', content: 'MindMosaic is a platform that allows users to explore and interact with a variety of content in a unique and engaging way.' },
+        { title: 'Our Goal', content: 'Our goal is to provide a space where users can discover new ideas, connect with others, and express themselves creatively.' },
+        { title: 'Join Us', content: 'Join us in creating a community of creative minds and explorers.' },
     ];
 
     return (
