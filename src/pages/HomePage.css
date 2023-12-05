@@ -1,6 +1,6 @@
 body {
     background-color: #121212;
-    color: #ffffff;
+    color: #b3b3b3;
     font-family: Arial, sans-serif;
 }
 
@@ -8,7 +8,7 @@ body {
     width: 200px;
     height: 100vh;
     position: fixed;
-    background-color: #282828;
+    background-color: #121212;
     padding: 20px;
 }
 
@@ -21,7 +21,7 @@ body {
 }
 
 .content-card {
-    background-color: #383838;
+    background-color: #282828;
     padding: 20px;
     border-radius: 10px;
     transition: transform 0.3s ease;
@@ -40,5 +40,5 @@ body {
 .content-card h2 {
     margin-top: 10px;
     font-size: 18px;
-    color: #ffffff;
+    color: #b3b3b3;
 }
