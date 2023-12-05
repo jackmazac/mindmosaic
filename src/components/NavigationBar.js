@@ -7,7 +7,7 @@ import logo from '../assets/circle_leaf_logo.jpg';
 const NavigationBar = () => {
     return (
         <nav className="navbar">
-            <img src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" className="navbar-logo" />
             <ul>
                 <li><Link to="/">Home</Link></li>
                 <li><Link to="/about">About</Link></li>

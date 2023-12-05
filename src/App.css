@@ -70,6 +70,11 @@
     color: #b3b3b3;
 }
 
+.navbar-logo {
+    height: 50px;
+    width: 50px;
+}
+
 .search-bar {
     margin-left: auto;
     width: 200px;
