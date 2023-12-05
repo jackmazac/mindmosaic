@@ -1,4 +1,5 @@
 import React from 'react';
+import '../styles/Spotify.css';
 
 class Artist extends React.Component {
     render() {
