@@ -1,6 +1,6 @@
 # Tunify
 
-Tunify is envisioned as a comprehensive digital platform that allows users to capture, categorize, and retrieve information across various media. It is designed to help users manage the plethora of content they interact with daily, including books, articles, podcasts, and videos. By leveraging a robust database and intuitive UI, MindMosaic serves as an intellectual tool that augments memory and facilitates the recall of information.
+Tunify is envisioned as a comprehensive digital platform that allows users to capture, categorize, and retrieve information across various media. It is designed to help users manage the plethora of content they interact with daily, including books, articles, podcasts, and videos. By leveraging a robust database and intuitive UI, Tunify serves as an intellectual tool that augments memory and facilitates the recall of information.
 
 ## Functionality
 
