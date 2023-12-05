@@ -12,13 +12,8 @@ router.get('/auth/start', startAuth);
 router.get('/auth/finish', finishAuth);
 
 // Route to fetch sample data from database
-router.get('/sampleData', (req, res) => {
-    db.query('SELECT * FROM Songs', (err, results) => {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        res.json(results);
-    });
-});
+const spotifyController = require('../controllers/spotifyController');
+
+router.get('/sampleData', spotifyController.getSampleData);
 
 module.exports = router;
