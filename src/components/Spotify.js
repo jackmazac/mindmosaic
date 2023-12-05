@@ -21,7 +21,7 @@ const Spotify = () => {
             <p>Here is some sample content:</p>
             <ul>
                 {data.map((item, index) => (
-                    <li key={index}>Track: {item.Title}, Duration: {item.Duration}</li>
+                    <li key={index}>Track: {item.track}, Artist: {item.artist}, Album: {item.album}, Duration: {item.duration}</li>
                 ))}
             </ul>
         </div>
