@@ -6,7 +6,7 @@ class Spotify extends React.Component {
         return (
             <div>
                 <h1>Spotify Integration Page</h1>
-                {/* TODO: Add more details here */}
+                <p>This is a sample content for the Spotify Integration Page. Actual Spotify data will be displayed here once the integration is complete.</p>
             </div>
         );
     }
