@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-// TODO: Import any necessary controllers or middleware
+const db = require('../db'); // Assuming you have a db.js file for database connection
 
 // Route to start the Spotify authentication process
 // TODO: Replace 'startAuth' with your actual function
@@ -11,8 +11,14 @@ router.get('/auth/start', startAuth);
 // TODO: Replace 'finishAuth' with your actual function
 router.get('/auth/finish', finishAuth);
 
-// Route to fetch user data from Spotify
-// TODO: Replace 'getUserData' with your actual function
-router.get('/user', getUserData);
+// Route to fetch sample data from database
+router.get('/sampleData', (req, res) => {
+    db.query('SELECT * FROM Songs', (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+});
 
 module.exports = router;
