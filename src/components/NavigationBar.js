@@ -14,6 +14,7 @@ const NavigationBar = () => {
                 <li><Link to="/contact">Contact</Link></li>
                 <li><Link to="/login">Login</Link></li>
                 <li><Link to="/register">Register</Link></li>
+                <li><Link to="/spotify">Spotify</Link></li>
             </ul>
             <SearchBar />
         </nav>
