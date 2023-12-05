@@ -6,7 +6,7 @@ const Spotify = () => {
     const [data, setData] = useState([]);
 
     useEffect(() => {
-        axios.get('/spotify/sampleData')
+        axios.get('/sampleData')
             .then(response => {
                 console.log('Received data from backend:', response.data);
                 setData(response.data);
