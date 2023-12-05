@@ -14,6 +14,6 @@ router.get('/auth/finish', finishAuth);
 // Route to fetch sample data from database
 const spotifyController = require('../controllers/spotifyController');
 
-router.get('/sampleData', spotifyController.getSampleData);
+router.get('/spotify/sampleData', spotifyController.getSampleData);
 
 module.exports = router;
