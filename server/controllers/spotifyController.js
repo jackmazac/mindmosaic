@@ -55,9 +55,13 @@ exports.exportSongsData = (req, res) => {
 
 // Get sample data
 exports.getSampleData = (req, res) => {
-    // Implement your logic to fetch sample data here
-    // For example, you might fetch data from your database and send it as a response
-    res.json({ message: 'Sample data fetched successfully' });
+    const query = "SELECT * FROM Songs LIMIT 10"; // Fetches the first 10 songs as sample data
+    db.query(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
 };
     const query = "SELECT * FROM Songs WHERE deleted = 0"; // Adjust query as needed
     db.query(query, (err, results) => {
