@@ -19,6 +19,9 @@ router.put('/songs/delete/:id', spotifyController.softDeleteSong);
 // Route to export songs data
 router.get('/exportData', spotifyController.exportSongsData);
 
+// Route to fetch sample data
+router.get('/sampleData', spotifyController.getSampleData);
+
 // Validation rules for adding a new song
 const songValidationRules = [
     body('title').notEmpty().withMessage('Title is required'),
