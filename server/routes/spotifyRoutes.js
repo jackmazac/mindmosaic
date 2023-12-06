@@ -13,6 +13,9 @@ router.post('/songs/add', spotifyController.addSong);
 // Route to update a song
 router.put('/songs/update/:id', spotifyController.updateSong);
 
+// Route to add a song
+router.post('/songs', spotifyController.addSong);
+
 // Route for soft deletion of a song
 router.put('/songs/delete/:id', spotifyController.softDeleteSong);
 
