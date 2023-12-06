@@ -70,9 +70,10 @@ exports.exportSongsData = (req, res) => {
 };
 
 // Get sample data
-exports.getSampleData = (req, res) => {
-    const query = "SELECT * FROM Songs LIMIT 10"; // Fetches the first 10 songs as sample data
-    db.query(query, (err, results) => {
+exports.getSongs = (req, res) => {
+    const filter = req.query.filter || '';
+    const query = "SELECT * FROM Songs WHERE title LIKE ?";
+    db.query(query, [`%${filter}%`], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
