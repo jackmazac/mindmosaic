@@ -7,18 +7,6 @@ const spotifyController = require('../controllers/spotifyController');
 // Route to fetch songs with optional filtering
 router.get('/songs', spotifyController.getSongs);
 
-// Route to add a new song
-router.post('/songs/add', songValidationRules, validate, spotifyController.addSong);
-
-// Route to update a song
-router.put('/songs/update/:id', spotifyController.updateSong);
-
-// Route for soft deletion of a song
-router.put('/songs/delete/:id', spotifyController.softDeleteSong);
-
-// Route to export songs data
-router.get('/exportData', spotifyController.exportSongsData);
-
 // Validation rules for adding a new song
 const songValidationRules = [
     body('title').notEmpty().withMessage('Title is required'),
@@ -33,5 +21,17 @@ const validate = (req, res, next) => {
     }
     next();
 };
+
+// Route to add a new song
+router.post('/songs/add', songValidationRules, validate, spotifyController.addSong);
+
+// Route to update a song
+router.put('/songs/update/:id', spotifyController.updateSong);
+
+// Route for soft deletion of a song
+router.put('/songs/delete/:id', spotifyController.softDeleteSong);
+
+// Route to export songs data
+router.get('/exportData', spotifyController.exportSongsData);
 
 module.exports = router;
