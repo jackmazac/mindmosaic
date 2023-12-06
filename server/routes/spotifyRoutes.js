@@ -22,6 +22,9 @@ router.get('/exportData', spotifyController.exportSongsData);
 // Route to fetch sample data
 router.get('/sampleData', spotifyController.getSampleData);
 
+// Route to export data
+router.get('/exportData', spotifyController.exportSongsData);
+
 // Validation rules for adding a new song
 const songValidationRules = [
     body('title').notEmpty().withMessage('Title is required'),
