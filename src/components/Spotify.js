@@ -18,11 +18,11 @@ const Spotify = () => {
     // Update Pagination
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-
     // Fetch songs with filters
     useEffect(() => {
         setLoading(true);
-        axios.get(`/sampleData?filter=${filter}`)
+        const filterParam = filter ? `?filter=${encodeURIComponent(filter)}` : ''; // Encode filter value
+        axios.get(`/api/spotify/songs${filterParam}`)
             .then(response => {
                 setSongs(response.data);
                 setLoading(false);
@@ -32,6 +32,9 @@ const Spotify = () => {
                 setLoading(false);
             });
     }, [filter]);
+
+
+
 
     // UI for filtering songs
     const handleFilterChange = (e) => {
@@ -53,6 +56,7 @@ const Spotify = () => {
         axios.post('/songs/add', newSong)
             .then(response => {
                 setSongs([...songs, response.data]);
+                setSuccessMessage('Song added successfully'); // Updated to show success message
             })
             .catch(error => setError('Error adding song'));
     };
@@ -72,6 +76,7 @@ const Spotify = () => {
         axios.put(`/songs/delete/${songId}`)
             .then(() => {
                 setSongs(songs.filter(song => song.id !== songId));
+                setSuccessMessage('Song deleted successfully'); // Updated to show success message
             })
             .catch(error => setError('Error deleting song'));
     };
@@ -83,9 +88,10 @@ const Spotify = () => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'SongsReport.csv'); // or '.xlsx'
+                link.setAttribute('download', 'SongsReport.csv');
                 document.body.appendChild(link);
                 link.click();
+                setSuccessMessage('Data exported successfully'); // Updated to show success message
             })
             .catch(error => setError('Error exporting data'));
     };
@@ -95,70 +101,66 @@ const Spotify = () => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>{error}</p>;
 
-        return songs.map(song => (
+        return currentSongs.map(song => (
             <div key={song.id}>
                 <h3>{song.title}</h3>
                 {/* other song details */}
-                <button onClick={() => deleteSong(song.id)}>Delete</button>
-                {/* Update form or button can be here */}
+                <button onClick={() => confirmDelete(song.id)}>Delete</button> {/* Use confirmDelete */}
+                <button onClick={() => updateSong(song)}>Update</button>
             </div>
         ));
     };
 
-   // Add Pagination Component
-   const Pagination = ({ songsPerPage, totalSongs, paginate }) => {
-    const pageNumbers = [];
+    // Add Pagination Component
+    const Pagination = ({ songsPerPage, totalSongs, paginate }) => {
+        const pageNumbers = [];
 
-    for (let i = 1; i <= Math.ceil(totalSongs / songsPerPage); i++) {
-        pageNumbers.push(i);
-    }
+        for (let i = 1; i <= Math.ceil(totalSongs / songsPerPage); i++) {
+            pageNumbers.push(i);
+        }
+
+        return (
+            <nav>
+                <ul className='pagination'>
+                    {pageNumbers.map(number => (
+                        <li key={number} className='page-item'>
+                            <a onClick={() => paginate(number)} href='!#' className='page-link'>
+                                {number}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        );
+    };
+
+    // Implement Confirm Deletion
+    const confirmDelete = (songId) => {
+        if (window.confirm('Are you sure you want to delete this song?')) {
+            deleteSong(songId);
+        }
+    };
+
+    // Display success messages
+    const renderSuccessMessage = () => {
+        return successMessage ? <div className="success-message">{successMessage}</div> : null;
+    };
 
     return (
-        <nav>
-            <ul className='pagination'>
-                {pageNumbers.map(number => (
-                    <li key={number} className='page-item'>
-                        <a onClick={() => paginate(number)} href='!#' className='page-link'>
-                            {number}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        </nav>
+        <div>
+            <h1>Spotify Integration Page</h1>
+            <input type="text" value={filter} onChange={handleFilterChange} placeholder="Filter Songs" />
+            {renderSuccessMessage()}
+            <form onSubmit={handleAddSongFormSubmit}>
+                <input type="text" name="title" placeholder="Song Title" />
+                {/* Other fields for song details */}
+                <button type="submit">Add Song</button>
+            </form>
+            {renderSongs()}
+            <button onClick={exportData}>Export Data</button>
+            <Pagination songsPerPage={songsPerPage} totalSongs={songs.length} paginate={paginate} />
+        </div>
     );
-};
-
-// Implement Confirm Deletion
-const confirmDelete = (songId) => {
-    if (window.confirm('Are you sure you want to delete this song?')) {
-        deleteSong(songId);
-    }
-};
-
-// Updated Delete Button in renderSongs
-// <button onClick={() => confirmDelete(song.id)}>Delete</button>
-
-// Display success messages
-const renderSuccessMessage = () => {
-    return successMessage ? <div className="success-message">{successMessage}</div> : null;
-};
-
-
-return (
-    <div>
-        <h1>Spotify Integration Page</h1>
-        <input type="text" value={filter} onChange={handleFilterChange} placeholder="Filter Songs" />
-        {renderSuccessMessage()}
-        <form onSubmit={handleAddSongFormSubmit}>
-            <input type="text" name="title" placeholder="Song Title" />
-            {/* Other fields for song details */}
-            <button type="submit">Add Song</button>
-        </form>
-        {renderSongs()}
-        <button onClick={exportData}>Export Data</button>
-        <Pagination songsPerPage={songsPerPage} totalSongs={songs.length} paginate={paginate} />
-    </div>
-);
 };
 
 export default Spotify;
