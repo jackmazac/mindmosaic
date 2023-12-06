@@ -15,5 +15,6 @@ router.get('/auth/finish', finishAuth);
 const spotifyController = require('../controllers/spotifyController');
 
 router.get('/sampleData', spotifyController.getSampleData);
+// TODO: Add routes for the new functions
 
 module.exports = router;

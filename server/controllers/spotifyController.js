@@ -16,5 +16,6 @@ const getSampleData = (req, res) => {
 };
 
 module.exports = {
-    getSampleData
+    getSampleData,
+    // TODO: Add functions for creating, updating, deleting, and querying records
 };
