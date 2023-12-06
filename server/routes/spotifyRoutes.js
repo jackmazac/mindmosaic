@@ -23,7 +23,7 @@ router.put('/songs/delete/:id', spotifyController.softDeleteSong);
 router.get('/exportData', spotifyController.exportSongsData);
 
 // Route to fetch sample data
-router.get('/songs', spotifyController.getSongs);
+router.get('/sampleData', spotifyController.getSongs);
 
 // Route to export data
 router.get('/exportData', spotifyController.exportSongsData);
