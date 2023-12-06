@@ -23,7 +23,7 @@ const Spotify = () => {
             <ul>
                 {data.length > 0 ? (
                     data.map((item, index) => (
-                        <li key={index}>Track: {item.track}, Artist: {item.artist}, Album: {item.album}, Duration: {item.duration}</li>
+                        <li key={index}>Track: {item.Title}, Artist: {item.ArtistID}, Album: {item.AlbumID}, Duration: {item.Duration}</li> // Replace 'Title', 'ArtistID', 'AlbumID', and 'Duration' with the names of the columns in your table
                     ))
                 ) : (
                     <p>No data to display.</p>
