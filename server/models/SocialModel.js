@@ -1,27 +1,35 @@
-const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/dbConfig');
+const db = require('../config/dbConfig')();
 
-class SocialInteraction extends Model {}
+const SocialInteraction = {
+    getAll: function(callback) {
+        return db.all('SELECT * FROM social_interactions', callback);
+    },
 
-SocialInteraction.init({
-    id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true
+    getById: function(id, callback) {
+        return db.get('SELECT * FROM social_interactions WHERE id = ?', [id], callback);
     },
-    likes: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
+
+    add: function(socialInteraction, callback) {
+        return db.run(
+            'INSERT INTO social_interactions (likes, comments) VALUES (?, ?)',
+            [socialInteraction.likes, socialInteraction.comments],
+            function(err) {
+                callback(err, { id: this.lastID });
+            }
+        );
     },
-    comments: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 0
+
+    update: function(id, socialInteraction, callback) {
+        return db.run(
+            'UPDATE social_interactions SET likes = ?, comments = ? WHERE id = ?',
+            [socialInteraction.likes, socialInteraction.comments, id],
+            callback
+        );
+    },
+
+    delete: function(id, callback) {
+        return db.run('DELETE FROM social_interactions WHERE id = ?', [id], callback);
     }
-}, {
-    sequelize,
-    modelName: 'SocialInteraction'
-});
+};
 
 module.exports = SocialInteraction;
