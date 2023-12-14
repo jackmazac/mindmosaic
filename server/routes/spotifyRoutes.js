@@ -5,7 +5,7 @@ const router = express.Router();
 const spotifyController = require('../controllers/spotifyController');
 
 // Route to fetch songs with optional filtering
-router.get('/api/spotify/songs', spotifyController.getSongs);
+router.get('/songs', spotifyController.getSongs);
 
 // Validation rules for adding a new song
 const songValidationRules = [
