@@ -1,12 +1,8 @@
--- Create database
-CREATE DATABASE myDatabase;
-
--- Use the created database
-USE myDatabase;
+-- SQLite does not require CREATE DATABASE or USE statements
 
 -- Users Table
 CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID INTEGER PRIMARY KEY AUTOINCREMENT,
     Username VARCHAR(255) NOT NULL UNIQUE,
     Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
@@ -15,14 +11,14 @@ CREATE TABLE Users (
 
 -- Artists Table
 CREATE TABLE Artists (
-    ArtistID INT AUTO_INCREMENT PRIMARY KEY,
+    ArtistID INTEGER PRIMARY KEY AUTOINCREMENT,
     Name VARCHAR(255) NOT NULL,
     Biography TEXT
 );
 
 -- Albums Table
 CREATE TABLE Albums (
-    AlbumID INT AUTO_INCREMENT PRIMARY KEY,
+    AlbumID INTEGER PRIMARY KEY AUTOINCREMENT,
     ArtistID INT NOT NULL,
     Title VARCHAR(255) NOT NULL,
     ReleaseDate DATE,
@@ -31,7 +27,7 @@ CREATE TABLE Albums (
 
 -- Songs Table
 CREATE TABLE Songs (
-    SongID INT AUTO_INCREMENT PRIMARY KEY,
+    SongID INTEGER PRIMARY KEY AUTOINCREMENT,
     AlbumID INT,
     Title VARCHAR(255) NOT NULL,
     Duration TIME,
@@ -40,7 +36,7 @@ CREATE TABLE Songs (
 
 -- Playlists Table
 CREATE TABLE Playlists (
-    PlaylistID INT AUTO_INCREMENT PRIMARY KEY,
+    PlaylistID INTEGER PRIMARY KEY AUTOINCREMENT,
     UserID INT NOT NULL,
     Name VARCHAR(255) NOT NULL,
     Description TEXT,

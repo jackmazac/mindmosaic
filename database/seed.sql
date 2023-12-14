@@ -1,5 +1,4 @@
--- Use the database
-USE myDatabase;
+-- SQLite does not require a USE statement
 
 -- Insert data into Users
 INSERT INTO Users (Username, Email, Password)

@@ -2,14 +2,16 @@ const db = require('../config/dbConfig');
 
 const User = {
     get: function(callback) {
-        return db.query('SELECT * from users', callback);
+        return db.all('SELECT * from users', callback);
     },
 
     register: function(User, callback) {
-        return db.query(
-            'INSERT into users (username,password,email) values(?,?,?)',
+        return db.run(
+            'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
             [User.username, User.password, User.email],
-            callback
+            function(err) {
+                callback(err, { id: this.lastID });
+            }
         );
     },
 
@@ -22,7 +24,7 @@ const User = {
     },
 
     getById: function(id, callback) {
-        return db.query('SELECT * from users where id=?', [id], callback);
+        return db.get('SELECT * from users where id=?', [id], callback);
     },
 
     add: function(User, callback) {
