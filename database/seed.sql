@@ -41,4 +41,21 @@ VALUES (1, 1),
 INSERT INTO UserInteractions (UserID_1, UserID_2, InteractionType)
 VALUES (1, 2, 'Follow'),
        (2, 3, 'Follow'),
-       (3, 1, 'Follow');
+       (3, 1, 'Follow'),
+       (1, 3, 'Follow'),
+       (2, 1, 'Follow');
+
+-- Additional sample data for Users
+INSERT INTO Users (Username, Email, Password)
+VALUES ('user4', 'user4@example.com', 'password4'),
+       ('user5', 'user5@example.com', 'password5');
+
+-- Additional sample data for Content
+INSERT INTO Content (UserID, Content)
+VALUES (4, 'Content from user4'),
+       (5, 'Content from user5');
+
+-- Additional sample data for Artists
+INSERT INTO Artists (Name, Biography)
+VALUES ('Artist 3', 'Biography for Artist 3'),
+       ('Artist 4', 'Biography for Artist 4');
