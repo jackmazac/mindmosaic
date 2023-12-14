@@ -9,6 +9,14 @@ CREATE TABLE Users (
     ProfileData TEXT
 );
 
+-- Content Table
+CREATE TABLE Content (
+    ContentID INTEGER PRIMARY KEY AUTOINCREMENT,
+    UserID INT NOT NULL,
+    Content TEXT NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
 -- Artists Table
 CREATE TABLE Artists (
     ArtistID INTEGER PRIMARY KEY AUTOINCREMENT,
