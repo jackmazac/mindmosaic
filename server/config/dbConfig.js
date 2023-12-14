@@ -1,23 +1,16 @@
-const mysql = require('mysql');
+const sqlite3 = require('sqlite3').verbose();
 
 const dbConnection = () => {
-    const connection = mysql.createConnection({
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        password: process.env.DB_PASSWORD,
-        database: process.env.DB_NAME
-    });
-
-    connection.connect(error => {
-        if (error) {
-            console.error('Error connecting to the database: ', error);
+    const db = new sqlite3.Database('./tunify.db', (err) => {
+        if (err) {
+            console.error('Error opening database', err.message);
             process.exit(1);
         } else {
-            console.log('Database connected successfully');
+            console.log('Connected to the SQLite database.');
         }
     });
 
-    return connection;
+    return db;
 };
 
 module.exports = dbConnection;
