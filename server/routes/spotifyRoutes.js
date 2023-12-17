@@ -4,8 +4,7 @@ const router = express.Router();
 
 const spotifyController = require('../controllers/spotifyController');
 
-// Route to fetch songs with optional filtering
-router.get('/songs', spotifyController.getSongs);
+// Ensure this line exists and matches exactly
 
 // Ensure this line exists and matches exactly
 
