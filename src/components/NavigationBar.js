@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import AboutPage from '../pages/AboutPage';
 import SearchBar from './SearchBar';
-import logo from '../assets/circle_leaf_logo.jpg';
+import logo from '../assets/tunify.png';
 
 const NavigationBar = () => {
     return (

@@ -1,17 +1,29 @@
-const db = require('../db'); // Assuming you have a db.js file for database connection
-const { Parser } = require('json2csv'); // You might need to install json2csv for CSV export
+const db = require('../db');
+const { Parser } = require('json2csv');
 
 // Get songs with optional filtering
 exports.getSongs = (req, res) => {
+    // Log that the function has been entered
+    console.log("Entered getSongs function");
+
     const filter = req.query.filter || '';
+    // Log the filter value
+    console.log("Filter value:", filter);
+
     const query = "SELECT * FROM Songs WHERE title LIKE ?";
     db.query(query, [`%${filter}%`], (err, results) => {
         if (err) {
+            // Log the error
+            console.error("Database query error:", err.message);
             return res.status(500).json({ error: err.message });
         }
+        // Log the results
+        console.log("Query results:", results);
+
         res.json(results);
     });
 };
+
 
 // Add a new song
 exports.addSong = (req, res) => {

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../api';
 import axios from 'axios';
 
 const Spotify = () => {
@@ -21,8 +22,9 @@ const Spotify = () => {
     // Fetch songs with filters
     useEffect(() => {
         setLoading(true);
-        const filterParam = filter ? `?filter=${encodeURIComponent(filter)}` : ''; // Encode filter value
-        // Ensure this line is using the correct environment variable for the base URL
+        const filterParam = filter ? `?filter=${encodeURIComponent(filter)}` : '';
+    
+        api.get(`/spotify/songs${filterParam}`)
             .then(response => {
                 setSongs(response.data);
                 setLoading(false);
@@ -32,6 +34,7 @@ const Spotify = () => {
                 setLoading(false);
             });
     }, [filter]);
+    
 
 
 
@@ -53,7 +56,7 @@ const Spotify = () => {
 
     // Add a song
     const addSong = (newSong) => {
-        axios.post('/songs/add', newSong)
+        axios.post(`${process.env.REACT_APP_API_BASE_URL}/spotify/songs/add`, newSong)
             .then(response => {
                 setSongs([...songs, response.data]);
                 setSuccessMessage('Song added successfully'); // Updated to show success message
@@ -63,7 +66,7 @@ const Spotify = () => {
 
     // Function to update a song
     const updateSong = (updatedSong) => {
-        axios.put(`/songs/update/${updatedSong.id}`, updatedSong)
+        axios.put(`${process.env.REACT_APP_API_BASE_URL}/spotify/songs/update/${updatedSong.id}`, updatedSong)
             .then(response => {
                 setSongs(songs.map(song => song.id === updatedSong.id ? response.data : song));
                 setSuccessMessage('Song updated successfully');
@@ -73,7 +76,7 @@ const Spotify = () => {
 
     // Soft delete a song
     const deleteSong = (songId) => {
-        axios.put(`/songs/delete/${songId}`)
+        axios.put(`${process.env.REACT_APP_API_BASE_URL}/spotify/songs/delete/${songId}`)
             .then(() => {
                 setSongs(songs.filter(song => song.id !== songId));
                 setSuccessMessage('Song deleted successfully'); // Updated to show success message
@@ -83,7 +86,7 @@ const Spotify = () => {
 
     // Export data
     const exportData = () => {
-        axios.get('/exportData', { responseType: 'blob' })
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/spotify/exportData`, { responseType: 'blob' })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');

@@ -1,5 +1,3 @@
--- SQLite does not require CREATE DATABASE or USE statements
-
 -- Users Table
 CREATE TABLE Users (
     UserID INTEGER PRIMARY KEY AUTOINCREMENT,

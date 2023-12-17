@@ -4,10 +4,6 @@ const router = express.Router();
 
 const spotifyController = require('../controllers/spotifyController');
 
-// Ensure this line exists and matches exactly
-
-// Ensure this line exists and matches exactly
-
 // Validation rules for adding a new song
 const songValidationRules = [
     body('title').notEmpty().withMessage('Title is required'),
@@ -23,16 +19,29 @@ const validate = (req, res, next) => {
     next();
 };
 
-// Route to add a new song
-router.post('/songs/add', songValidationRules, validate, spotifyController.addSong);
+router.get('/songs', (req, res, next) => {
+    console.log("GET /songs route hit");
+    spotifyController.getSongs(req, res, next);
+});
 
-// Route to update a song
-router.put('/songs/update/:id', spotifyController.updateSong);
+router.post('/songs/add', songValidationRules, validate, (req, res, next) => {
+    console.log("POST /songs/add route hit");
+    spotifyController.addSong(req, res, next);
+});
 
-// Route for soft deletion of a song
-router.put('/songs/delete/:id', spotifyController.softDeleteSong);
+router.put('/songs/update/:id', (req, res, next) => {
+    console.log("PUT /songs/update/:id route hit");
+    spotifyController.updateSong(req, res, next);
+});
 
-// Route to export songs data
-router.get('/exportData', spotifyController.exportSongsData);
+router.put('/songs/delete/:id', (req, res, next) => {
+    console.log("PUT /songs/delete/:id route hit");
+    spotifyController.softDeleteSong(req, res, next);
+});
+
+router.get('/exportData', (req, res, next) => {
+    console.log("GET /exportData route hit");
+    spotifyController.exportSongsData(req, res, next);
+});
 
 module.exports = router;

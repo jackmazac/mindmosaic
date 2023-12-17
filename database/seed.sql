@@ -1,5 +1,3 @@
--- SQLite does not require a USE statement
-
 -- Insert data into Users
 INSERT INTO Users (Username, Email, Password)
 VALUES ('user1', 'user1@example.com', 'password1'),
