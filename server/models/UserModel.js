@@ -13,7 +13,6 @@ const User = {
                 callback(err, { id: this.lastID });
             }
         });
-        );
     },
 
     getByUsername: function(username, callback) {
@@ -37,7 +36,6 @@ const User = {
         );
     },
 
-    // ... other methods ...
     delete: function(id, callback) {
         return db.query('DELETE from users where id=?', [id], callback);
     },

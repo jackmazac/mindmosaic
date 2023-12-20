@@ -1,5 +1,6 @@
 const UserModel = require('../models/UserModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const saltRounds = 10;
 
 const UserController = {
@@ -27,16 +28,6 @@ const UserController = {
                     res.status(201).json({ message: 'User registered successfully', userId: user.id, token: token });
                 }
             });
-        });
-    },
-                    res.status(201).json({ message: 'User registered successfully', userId: user.id });
-                }
-            });
-            if (err) {
-                res.status(500).json({ error: 'Error logging in', details: err });
-            } else {
-                res.json(user);
-            }
         });
     },
 
@@ -158,5 +149,4 @@ const UserController = {
 };
 
 module.exports = UserController;
-const jwt = require('jsonwebtoken');
-const secretKey = 'your_secret_key'; // This should be an environment variable
+
