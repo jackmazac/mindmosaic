@@ -5,6 +5,7 @@ Tunify is envisioned as a comprehensive digital platform that allows users to ca
 ## Functionality
 
 The application will allow users to:
+
 - Automatically capture data from integrations with platforms such as YouTube, Spotify, and others.
 - Manage and query metadata associated with their content.
 - Conduct advanced searches with multiple parameters.
@@ -40,8 +41,8 @@ As per the project requirements, the back-end will be powered by MySQL. This dat
 1. Clone the repository to your local machine.
 2. Navigate to the project directory.
 3. Install the required dependencies by running `npm install`.
-4. Start the server by running `npm start`.
-5. The server will start running on `http://localhost:5000`.
-6. To setup the database, navigate to the `database` directory.
-7. Run the `init.sql` file to create the database and tables.
-8. Run the `seed.sql` file to populate the tables with initial data.
+4. Create database by running `sqlite3 tunify.db < init.sql`.
+5. Populate database by running  `sqlite3 tunify.db < seed.sql`.
+6. Start Express server by running `node server/server.js`.
+7. Start React client by running  `npm start`
+8. Navigate in browser to http://localhost:3000/
