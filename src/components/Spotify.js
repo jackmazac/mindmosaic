@@ -64,9 +64,9 @@ const Spotify = () => {
             album: event.target.album.value,
         };
 
-        axios.put(`${apiUrl}/spotify/songs/update/${updatedSong.id}`, updatedSong)
+        axios.put(`${apiUrl}/spotify/songs/update/${updatedSong.SongID}`, updatedSong)
             .then(response => {
-                setSongs(songs.map(song => song.id === updatedSong.id ? response.data : song));
+                setSongs(songs.map(song => song.SongID === updatedSong.SongID ? updatedSong : song));
                 setSuccessMessage('Song updated successfully');
                 setError('');
             })
@@ -75,7 +75,7 @@ const Spotify = () => {
     };
 
     const handleDeleteSong = (songId) => {
-        axios.delete(`${apiUrl}/songs/delete/${songId}`)
+        axios.delete(`${apiUrl}/spotify/songs/delete/${songId}`)
             .then(() => {
                 setSongs(songs.filter(song => song.SongID !== songId));
                 setSuccessMessage('Song deleted successfully');
