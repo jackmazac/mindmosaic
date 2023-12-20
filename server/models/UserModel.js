@@ -5,10 +5,10 @@ const User = {
         return db.all('SELECT * from users', callback);
     },
 
-    register: function(User, callback) {
-        return db.run(
-            'INSERT INTO users (username, password, email) VALUES (?, ?, ?)',
-            [User.username, User.password, User.email],
+    register: function(user, callback) {
+        const query = 'INSERT INTO users (username, password, email) VALUES (?, ?, ?)';
+        const params = [user.username, user.password, user.email];
+        db.run(query, params, function(err) {
             function(err) {
                 callback(err, { id: this.lastID });
             }

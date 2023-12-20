@@ -1,4 +1,6 @@
 const UserModel = require('../models/UserModel');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const UserController = {
     getAllUsers: function(req, res) {
@@ -11,13 +13,19 @@ const UserController = {
         });
     },
 
-    registerUser: function(req, res) {
-        UserModel.register(req.body, function(err, user) {
+    register: function(req, res) {
+        const { username, email, password } = req.body;
+        bcrypt.hash(password, saltRounds, function(err, hash) {
+            if (err) {
+                return res.status(500).json({ error: 'Error hashing password' });
+            }
+            UserModel.register({ username, email, password: hash }, function(err, user) {
             if (err) {
                 res.status(500).send(err);
             } else {
                 res.json(user);
             }
+        });
         });
     },
 
