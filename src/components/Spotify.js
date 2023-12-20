@@ -99,7 +99,9 @@ const Spotify = () => {
                     <span className="close-button" onClick={closeEditModal}>&times;</span>
                     <form onSubmit={handleEditFormSubmit}>
                         <input type="text" name="title" defaultValue={editingSong.title} placeholder="Song Title" />
-                        {/* Add other fields for song properties */}
+                        <input type="text" name="artist" defaultValue={editingSong.artist} placeholder="Artist" />
+                        <input type="text" name="duration" defaultValue={editingSong.duration} placeholder="Duration" />
+                        <input type="text" name="album" defaultValue={editingSong.album} placeholder="Album" />
                         <button type="submit">Update Song</button>
                     </form>
                 </div>
@@ -225,4 +227,3 @@ const Spotify = () => {
     };
 
     export default Spotify;
-
