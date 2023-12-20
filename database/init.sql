@@ -36,6 +36,7 @@ CREATE TABLE Songs (
     SongID INTEGER PRIMARY KEY AUTOINCREMENT,
     AlbumID INT,
     Title VARCHAR(255) NOT NULL,
+    Artist VARCHAR(255),
     Duration TIME,
     deleted INTEGER DEFAULT 0,
     FOREIGN KEY (AlbumID) REFERENCES Albums(AlbumID)
