@@ -23,6 +23,12 @@ const UserController = {
                 if (err) {
                     res.status(500).json({ error: 'Error registering new user', details: err });
                 } else {
+                    const token = jwt.sign({ userId: user.id, username: username }, secretKey, { expiresIn: '1h' });
+                    res.status(201).json({ message: 'User registered successfully', userId: user.id, token: token });
+                }
+            });
+        });
+    },
                     res.status(201).json({ message: 'User registered successfully', userId: user.id });
                 }
             });
@@ -65,6 +71,8 @@ const UserController = {
                     if (result) {
                         // TODO: Generate a token or session for the user
                         res.json({ message: 'Login successful', userId: user.UserID });
+                        const token = jwt.sign({ userId: user.UserID, username: username }, secretKey, { expiresIn: '1h' });
+                        res.json({ message: 'Login successful', userId: user.UserID, token: token });
                     } else {
                         res.status(401).json({ error: 'Invalid credentials' });
                     }
@@ -150,3 +158,5 @@ const UserController = {
 };
 
 module.exports = UserController;
+const jwt = require('jsonwebtoken');
+const secretKey = 'your_secret_key'; // This should be an environment variable
