@@ -24,7 +24,7 @@ const UserController = {
             const hash = derivedKey.toString('hex');
             UserModel.register({ username, email, password: hash, salt }, function(err, user) {
                 if (err) {
-                    res.status(500).json({ error: 'Error registering new user', details: err });
+                    return res.status(500).json({ error: 'Error registering new user', details: err.message });
                 } else {
                     const token = jwt.sign({ userId: user.id, username: username }, secretKey, { expiresIn: '1h' });
                     res.status(201).json({ message: 'User registered successfully', userId: user.id, token: token });

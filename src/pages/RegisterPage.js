@@ -24,7 +24,7 @@ const RegisterPage = () => {
                 navigate('/login'); // Redirect to the login page after successful registration
             })
             .catch(error => {
-                setError('Registration failed. ' + (error.response ? error.response.data.error : 'Unknown error'));
+                setError('Registration failed. ' + (error.response && error.response.data && error.response.data.error ? error.response.data.error : 'Unknown error'));
                 console.error('Registration error:', error.response ? error.response.data : error);
             });
     };
