@@ -44,7 +44,7 @@ const Spotify = () => {
 
         axios.post(`${apiUrl}/spotify/songs/add`, newSong)
             .then(response => {
-                setSongs([...songs, response.data]);
+                fetchSongs(); // Fetch the updated list of songs including the new one
                 setSuccessMessage('Song added successfully');
                 setError('');
             })
