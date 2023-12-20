@@ -5,7 +5,7 @@ const Spotify = () => {
     const [songs, setSongs] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const [filter, setFilter] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [songsPerPage] = useState(10);
@@ -22,7 +22,7 @@ const Spotify = () => {
     // Fetch songs with filters
     useEffect(() => {
         setLoading(true);
-        const filterParam = filter ? `?filter=${encodeURIComponent(filter)}` : '';
+        const filterParam = searchTerm ? `?filter=${encodeURIComponent(searchTerm)}` : '';
 
         axios.get(`${process.env.REACT_APP_API_BASE_URL}/spotify/songs${filterParam}`)
             .then(response => {
@@ -40,8 +40,8 @@ const Spotify = () => {
 
 
     // UI for filtering songs
-    const handleFilterChange = (e) => {
-        setFilter(e.target.value);
+    const handleSearchChange = (e) => {
+        setSearchTerm(e.target.value);
     };
 
     // Form submission handler for adding a song
@@ -102,9 +102,30 @@ const Spotify = () => {
     };
 
     // Render songs
-    const renderSongs = () => {
+    const renderTopSongs = () => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>{error}</p>;
+        const topSongs = songs.slice(0, 3);
+        return topSongs.map((song, index) => (
+            <div key={song.id || index} className="song-entry">
+                <span>{song.title}</span>
+                <span>{song.artist}</span>
+                <span>{song.duration}</span>
+                <span>{song.album}</span>
+                <button onClick={() => confirmEdit(song.id)}>Edit</button>
+            </div>
+        ));
+    };
+
+    const renderSongs = () => {
+        // ... rest of the renderSongs function
+    };
+
+    // Implement Confirm Edit
+    const confirmEdit = (songId) => {
+        // ... implementation for editing a song
+    };
+
 
         return currentSongs.map((song, index) => (
             <div key={song.id || index}>
@@ -152,17 +173,35 @@ const Spotify = () => {
 
     return (
         <div>
-            <h1>Spotify Integration Page</h1>
-            <input type="text" value={filter} onChange={handleFilterChange} placeholder="Filter Songs" />
+    return (
+        <div className="spotify-page">
+            <h1 style={{ textAlign: 'center' }}>Spotify Integration Page</h1>
+            <div className="spotify-layout">
+                <div className="spotify-left-column">
+                    <h2>Your Songs</h2>
+                    {renderTopSongs()}
+                    <input
+                        type="text"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        placeholder="Search Songs"
+                    />
+                </div>
+                <div className="spotify-right-column">
+                    <h2>Add New Song</h2>
+                    <form onSubmit={handleAddSongFormSubmit}>
+                        <input type="text" name="title" placeholder="Song Title" />
+                        <input type="text" name="artist" placeholder="Artist" />
+                        <input type="text" name="duration" placeholder="Duration" />
+                        <input type="text" name="album" placeholder="Album" />
+                        <button type="submit">Add Song</button>
+                    </form>
+                </div>
+            </div>
             {renderSuccessMessage()}
-            <form onSubmit={handleAddSongFormSubmit}>
-                <input type="text" name="title" placeholder="Song Title" />
-                <input type="text" name="albumId" placeholder="Album ID" />
-                <input type="text" name="duration" placeholder="Duration" />
-                {/* Other fields for song details */}
-                <button type="submit">Add Song</button>
-            </form>
-            {renderSongs()}
+            <div className="spotify-songs-list">
+                {renderSongs()}
+            </div>
             <button onClick={exportData}>Export Data</button>
             <Pagination songsPerPage={songsPerPage} totalSongs={songs.length} paginate={paginate} />
         </div>
