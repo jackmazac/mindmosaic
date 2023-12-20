@@ -1,12 +1,12 @@
-const db = require('../config/dbConfig');
+const db = require('../db');
 
 const User = {
     get: function(callback) {
-        return db.all('SELECT * from users', callback);
+        db.all('SELECT * FROM Users', callback);
     },
 
     register: function(user, callback) {
-        const query = 'INSERT INTO users (username, password, salt, email) VALUES (?, ?, ?, ?)';
+        const query = 'INSERT INTO Users (Username, Password, Salt, Email) VALUES (?, ?, ?, ?)';
         const params = [user.username, user.password, user.salt, user.email];
         db.run(query, params, function(err) {
             if (err) {
@@ -18,36 +18,33 @@ const User = {
     },
 
     getByUsername: function(username, callback) {
-        return db.get(
-            'SELECT * from users where username=?',
-            [username],
-            callback
-        );
+        db.get('SELECT * FROM Users WHERE Username=?', [username], callback);
     },
 
-    // ... other methods ...
     getById: function(id, callback) {
-        return db.get('SELECT * from users where id=?', [id], callback);
+        db.get('SELECT * FROM Users WHERE UserID=?', [id], callback);
     },
 
     add: function(User, callback) {
-        return db.query(
-            'INSERT into users (username,password,email) values(?,?,?)',
-            [User.username, User.password, User.email],
-            callback
-        );
+        const query = 'INSERT INTO Users (Username, Password, Salt, Email) VALUES (?, ?, ?, ?)';
+        const params = [User.username, User.password, User.salt, User.email];
+        db.run(query, params, function(err) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, { id: this.lastID });
+            }
+        });
     },
 
     delete: function(id, callback) {
-        return db.query('DELETE from users where id=?', [id], callback);
+        db.run('DELETE FROM Users WHERE UserID=?', [id], callback);
     },
 
     update: function(id, User, callback) {
-        return db.query(
-            'UPDATE users set username=?, password=?, email=? where id=?',
-            [User.username, User.password, User.email, id],
-            callback
-        );
+        const query = 'UPDATE Users SET Username=?, Password=?, Salt=?, Email=? WHERE UserID=?';
+        const params = [User.username, User.password, User.salt, User.email, id];
+        db.run(query, params, callback);
     }
 };
 
