@@ -25,7 +25,8 @@ exports.addSong = (req, res) => {
     const query = "INSERT INTO Songs (title, artist, duration, album, deleted) VALUES (?, ?, ?, ?, 0)";
     db.run(query, [title, artist, duration, album], function(err) {
         if (err) {
-            return res.status(500).json({ error: err.message });
+            console.error("Error adding song:", err);
+            return res.status(500).json({ error: "Error adding song: " + err.message });
         }
         res.status(201).json({ message: 'Song added successfully', songId: this.lastID });
     });
