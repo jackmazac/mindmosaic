@@ -57,21 +57,23 @@ const Spotify = () => {
     const handleEditFormSubmit = (event) => {
         event.preventDefault();
         const updatedSong = {
-            ...editingSong,
             title: event.target.title.value,
             artist: event.target.artist.value,
             duration: event.target.duration.value,
             album: event.target.album.value,
         };
 
-        axios.put(`${apiUrl}/spotify/songs/update/${updatedSong.SongID}`, updatedSong)
+        axios.put(`${apiUrl}/spotify/songs/update/${editingSong.SongID}`, updatedSong)
             .then(response => {
-                setSongs(songs.map(song => song.SongID === updatedSong.SongID ? updatedSong : song));
+                setSongs(prevSongs => prevSongs.map(song => song.SongID === editingSong.SongID ? { ...song, ...updatedSong } : song));
                 setSuccessMessage('Song updated successfully');
                 setError('');
+                closeEditModal();
             })
-            .catch(err => setError('Error updating song'));
-        closeEditModal();
+            .catch(err => {
+                setError('Error updating song');
+                console.error('Error updating song:', err.response ? err.response.data : err);
+            });
     };
 
     const handleDeleteSong = (songId) => {
