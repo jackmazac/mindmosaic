@@ -48,7 +48,10 @@ const Spotify = () => {
                 setSuccessMessage('Song added successfully');
                 setError('');
             })
-            .catch(err => setError('Error adding song'));
+            .catch(err => {
+                console.error('Error adding song:', err.response ? err.response.data : err);
+                setError('Error adding song: ' + (err.response ? err.response.data.error : 'Unknown error'));
+            });
     };
 
     const handleEditFormSubmit = (event) => {
@@ -158,7 +161,7 @@ const Spotify = () => {
         const indexOfLastSong = currentPage * songsPerPage;
         const indexOfFirstSong = indexOfLastSong - songsPerPage;
         const currentSongs = songs.slice(indexOfFirstSong, indexOfLastSong);
-    
+
         return currentSongs.map((song, index) => (
             <div key={song.SongID || index} className="song-item">
                 <h3>{song.Title}</h3>
@@ -170,13 +173,13 @@ const Spotify = () => {
             </div>
         ));
     };
-    
+
     const Pagination = () => {
         const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(songs.length / songsPerPage); i++) {
             pageNumbers.push(i);
         }
-    
+
         return (
             <nav>
                 <ul className="pagination">
@@ -193,7 +196,7 @@ const Spotify = () => {
             </nav>
         );
     };
-    
+
     const renderSuccessErrorMessages = () => {
         return (
             <div>
@@ -202,7 +205,7 @@ const Spotify = () => {
             </div>
         );
     };
-    
+
     return (
         <div className="spotify-page">
             <div className="spotify-layout">
@@ -220,6 +223,6 @@ const Spotify = () => {
         </div>
     );
     };
-    
+
     export default Spotify;
-    
+
