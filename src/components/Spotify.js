@@ -172,8 +172,6 @@ const Spotify = () => {
     };
 
     return (
-        <div>
-    return (
         <div className="spotify-page">
             <h1 style={{ textAlign: 'center' }}>Spotify Integration Page</h1>
             <div className="spotify-layout">
