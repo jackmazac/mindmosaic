@@ -16,7 +16,7 @@ const LoginPage = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post(`${apiUrl}/login`, { username, password })
+        axios.post(`${apiUrl}/users/login`, { username, password })
             .then(response => {
                 // Handle successful login here, e.g., store the token, redirect to a dashboard, etc.
                 console.log('Login successful:', response.data);
