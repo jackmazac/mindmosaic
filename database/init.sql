@@ -37,6 +37,7 @@ CREATE TABLE Songs (
     AlbumID INT,
     Title VARCHAR(255) NOT NULL,
     Duration TIME,
+    deleted INTEGER DEFAULT 0,
     FOREIGN KEY (AlbumID) REFERENCES Albums(AlbumID)
 );
 
