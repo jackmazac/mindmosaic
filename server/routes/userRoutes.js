@@ -5,6 +5,7 @@ const UserController = require('../controllers/UserController');
 
 // Registration endpoint
 router.post('/register', UserController.register);
+router.post('/login', UserController.loginUser);
 
 router.get('/', UserController.getAllUsers);
 router.get('/:id', UserController.getUserById);

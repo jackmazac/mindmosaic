@@ -55,6 +55,25 @@ const UserController = {
             }
         });
     },
+    loginUser: function(req, res) {
+        const { username, password } = req.body;
+        UserModel.getByUsername(username, function(err, user) {
+            if (err) {
+                res.status(500).json({ error: 'Error logging in', details: err });
+            } else if (user) {
+                bcrypt.compare(password, user.password, function(err, result) {
+                    if (result) {
+                        // TODO: Generate a token or session for the user
+                        res.json({ message: 'Login successful', userId: user.UserID });
+                    } else {
+                        res.status(401).json({ error: 'Invalid credentials' });
+                    }
+                });
+            } else {
+                res.status(404).json({ error: 'User not found' });
+            }
+        });
+    },
 
     getUserById: function(req, res) {
         UserModel.getById(req.params.id, function(err, user) {
