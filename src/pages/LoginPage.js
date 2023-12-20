@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -19,7 +19,7 @@ const LoginPage = () => {
             .then(response => {
                 // Handle successful login here, e.g., store the token, redirect to a dashboard, etc.
                 console.log('Login successful:', response.data);
-                history.push('/dashboard'); // Redirect to the dashboard page or wherever appropriate
+                navigate('/dashboard'); // Redirect to the dashboard page or wherever appropriate
             })
             .catch(error => {
                 // Handle login error here, e.g., show an error message to the user
