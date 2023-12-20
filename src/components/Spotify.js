@@ -24,7 +24,7 @@ const Spotify = () => {
         setLoading(true);
         const filterParam = filter ? `?filter=${encodeURIComponent(filter)}` : '';
     
-        api.get(`/spotify/songs${filterParam}`)
+        axios.get(`${process.env.REACT_APP_API_BASE_URL}/spotify/songs${filterParam}`)
             .then(response => {
                 setSongs(response.data);
                 setLoading(false);
