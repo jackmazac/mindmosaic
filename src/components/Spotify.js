@@ -22,7 +22,7 @@ const Spotify = () => {
     useEffect(() => {
         setLoading(true);
         const filterParam = filter ? `?filter=${encodeURIComponent(filter)}` : '';
-    
+
         axios.get(`${process.env.REACT_APP_API_BASE_URL}/spotify/songs${filterParam}`)
             .then(response => {
                 setSongs(response.data);
@@ -33,7 +33,7 @@ const Spotify = () => {
                 setLoading(false);
             });
     }, [filter]);
-    
+
 
 
 
@@ -103,8 +103,8 @@ const Spotify = () => {
         if (loading) return <p>Loading...</p>;
         if (error) return <p>{error}</p>;
 
-        return currentSongs.map(song => (
-            <div key={song.id}>
+        return currentSongs.map((song, index) => (
+            <div key={song.id || index}>
                 <h3>{song.title}</h3>
                 {/* other song details */}
                 <button onClick={() => confirmDelete(song.id)}>Delete</button> {/* Use confirmDelete */}
