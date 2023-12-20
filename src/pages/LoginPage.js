@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const LoginPage = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
     const navigate = useNavigate();
 
     const handleInputChange = (event) => {
@@ -15,7 +16,7 @@ const LoginPage = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('/api/login', { username, password })
+        axios.post(`${apiUrl}/login`, { username, password })
             .then(response => {
                 // Handle successful login here, e.g., store the token, redirect to a dashboard, etc.
                 console.log('Login successful:', response.data);
