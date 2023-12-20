@@ -75,9 +75,9 @@ const Spotify = () => {
     };
 
     const handleDeleteSong = (songId) => {
-        axios.delete(`${apiUrl}/spotify/songs/delete/${songId}`)
+        axios.delete(`${apiUrl}/songs/delete/${songId}`)
             .then(() => {
-                setSongs(songs.filter(song => song.id !== songId));
+                setSongs(songs.filter(song => song.SongID !== songId));
                 setSuccessMessage('Song deleted successfully');
                 setError('');
             })
