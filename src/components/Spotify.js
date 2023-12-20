@@ -13,7 +13,8 @@ const Spotify = () => {
     // Pagination Logic
     const indexOfLastSong = currentPage * songsPerPage;
     const indexOfFirstSong = indexOfLastSong - songsPerPage;
-    const currentSongs = songs.slice(indexOfFirstSong, indexOfLastSong);
+    // Ensure at least 3 songs are displayed
+    const currentSongs = songs.length >= 3 ? songs.slice(indexOfFirstSong, indexOfLastSong) : songs;
 
     // Update Pagination
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -48,6 +49,8 @@ const Spotify = () => {
         event.preventDefault();
         const newSong = {
             title: event.target.title.value,
+            albumId: event.target.albumId.value,
+            duration: event.target.duration.value
             // other song properties
         };
         addSong(newSong);
@@ -107,8 +110,7 @@ const Spotify = () => {
             <div key={song.id || index}>
                 <h3>{song.title}</h3>
                 {/* other song details */}
-                <button onClick={() => confirmDelete(song.id)}>Delete</button> {/* Use confirmDelete */}
-                <button onClick={() => updateSong(song)}>Update</button>
+                <button onClick={() => confirmDelete(song.id)}>Delete</button> {/* Delete button next to song */}
             </div>
         ));
     };
@@ -155,6 +157,8 @@ const Spotify = () => {
             {renderSuccessMessage()}
             <form onSubmit={handleAddSongFormSubmit}>
                 <input type="text" name="title" placeholder="Song Title" />
+                <input type="text" name="albumId" placeholder="Album ID" />
+                <input type="text" name="duration" placeholder="Duration" />
                 {/* Other fields for song details */}
                 <button type="submit">Add Song</button>
             </form>
