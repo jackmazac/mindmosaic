@@ -10,7 +10,6 @@ const User = {
         const params = [user.username, user.password, user.salt, user.email];
         db.run(query, params, function(err) {
             if (err) {
-                callback(err, { id: this.lastID });
                 callback(err);
             } else {
                 callback(null, { id: this.lastID });
