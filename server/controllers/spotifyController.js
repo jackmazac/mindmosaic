@@ -10,8 +10,8 @@ exports.getSongs = (req, res) => {
     // Log the filter value
     console.log("Filter value:", filter);
 
-    const query = "SELECT * FROM Songs WHERE title LIKE ?";
-    db.query(query, [`%${filter}%`], (err, results) => {
+    const query = "SELECT * FROM Songs WHERE title LIKE ? AND deleted = 0";
+    db.all(query, [`%${filter}%`], (err, results) => {
         if (err) {
             // Log the error
             console.error("Database query error:", err.message);
@@ -28,8 +28,8 @@ exports.getSongs = (req, res) => {
 // Add a new song
 exports.addSong = (req, res) => {
     const { title, albumId, duration } = req.body; // Include other fields as necessary
-    const query = "INSERT INTO Songs (title, albumId, duration) VALUES (?, ?, ?)";
-    db.query(query, [title, albumId, duration], (err, results) => {
+    const query = "INSERT INTO Songs (title, albumId, duration, deleted) VALUES (?, ?, ?, 0)";
+    db.run(query, [title, albumId, duration], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -41,8 +41,8 @@ exports.addSong = (req, res) => {
 exports.updateSong = (req, res) => {
     const songId = req.params.id;
     const { title, albumId, duration } = req.body; // Include other fields as necessary
-    const query = "UPDATE Songs SET title = ?, albumId = ?, duration = ? WHERE id = ?";
-    db.query(query, [title, albumId, duration, songId], (err, results) => {
+    const query = "UPDATE Songs SET title = ?, albumId = ?, duration = ? WHERE SongID = ?";
+    db.run(query, [title, albumId, duration, songId], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -53,8 +53,8 @@ exports.updateSong = (req, res) => {
 // Soft delete a song
 exports.softDeleteSong = (req, res) => {
     const songId = req.params.id;
-    const query = "UPDATE Songs SET deleted = 1 WHERE id = ?";
-    db.query(query, [songId], (err, results) => {
+    const query = "UPDATE Songs SET deleted = 1 WHERE SongID = ?";
+    db.run(query, [songId], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -64,8 +64,8 @@ exports.softDeleteSong = (req, res) => {
 
 // Export songs data as CSV
 exports.exportSongsData = (req, res) => {
-    const query = "SELECT * FROM Songs WHERE deleted = 0"; // Adjust query as needed
-    db.query(query, (err, results) => {
+    const query = "SELECT * FROM Songs WHERE deleted = 0";
+    db.all(query, (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
