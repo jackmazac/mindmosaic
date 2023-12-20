@@ -1,7 +1,7 @@
 const UserModel = require('../models/UserModel');
-const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const saltRounds = 10;
+const secretKey = 'your-secret-key'; // You should replace this with your actual secret key
 
 const UserController = {
     getAllUsers: function(req, res) {
@@ -16,7 +16,12 @@ const UserController = {
 
     register: function(req, res) {
         const { username, email, password } = req.body;
-        bcrypt.hash(password, saltRounds, function(err, hash) {
+        const salt = crypto.randomBytes(16).toString('hex');
+        crypto.pbkdf2(password, salt, 1000, 64, 'sha512', (err, derivedKey) => {
+            if (err) {
+                return res.status(500).json({ error: 'Error hashing password' });
+            }
+            const hash = derivedKey.toString('hex');
             if (err) {
                 return res.status(500).json({ error: 'Error hashing password' });
             }
@@ -38,7 +43,12 @@ const UserController = {
                 res.status(500).json({ error: 'Error logging in', details: err });
             } else {
                 if (user) {
-                    bcrypt.compare(password, user.password, function(err, result) {
+                    crypto.pbkdf2(password, user.salt, 1000, 64, 'sha512', (err, derivedKey) => {
+                        if (err) {
+                            return res.status(500).json({ error: 'Error verifying password' });
+                        }
+                        const hash = derivedKey.toString('hex');
+                        if (hash === user.password) {
                         if (result) {
                             // TODO: Generate a token or session for the user
                             res.json({ message: 'Login successful', userId: user.id });
@@ -80,7 +90,12 @@ const UserController = {
                 res.status(500).json({ error: 'Error logging in', details: err });
             } else {
                 if (user) {
-                    bcrypt.compare(password, user.password, function(err, result) {
+                    crypto.pbkdf2(password, user.salt, 1000, 64, 'sha512', (err, derivedKey) => {
+                        if (err) {
+                            return res.status(500).json({ error: 'Error verifying password' });
+                        }
+                        const hash = derivedKey.toString('hex');
+                        if (hash === user.password) {
                         if (result) {
                             // TODO: Generate a token or session for the user
                             res.json({ message: 'Login successful', userId: user.id });
@@ -101,7 +116,12 @@ const UserController = {
                 res.status(500).json({ error: 'Error logging in', details: err });
             } else {
                 if (user) {
-                    bcrypt.compare(password, user.password, function(err, result) {
+                    crypto.pbkdf2(password, user.salt, 1000, 64, 'sha512', (err, derivedKey) => {
+                        if (err) {
+                            return res.status(500).json({ error: 'Error verifying password' });
+                        }
+                        const hash = derivedKey.toString('hex');
+                        if (hash === user.password) {
                         if (result) {
                             // TODO: Generate a token or session for the user
                             res.json({ message: 'Login successful', userId: user.id });
@@ -122,7 +142,12 @@ const UserController = {
                 res.status(500).json({ error: 'Error logging in', details: err });
             } else {
                 if (user) {
-                    bcrypt.compare(password, user.password, function(err, result) {
+                    crypto.pbkdf2(password, user.salt, 1000, 64, 'sha512', (err, derivedKey) => {
+                        if (err) {
+                            return res.status(500).json({ error: 'Error verifying password' });
+                        }
+                        const hash = derivedKey.toString('hex');
+                        if (hash === user.password) {
                         if (result) {
                             // TODO: Generate a token or session for the user
                             res.json({ message: 'Login successful', userId: user.id });
