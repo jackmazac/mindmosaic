@@ -32,7 +32,6 @@ const UserController = {
                 res.json(user);
             }
         });
-        });
     },
 
     loginUser: function(req, res) {
@@ -129,7 +128,6 @@ const UserController = {
             }
         });
     }
-    // ... other methods ...
 };
 
 module.exports = UserController;
