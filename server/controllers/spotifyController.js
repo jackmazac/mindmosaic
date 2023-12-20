@@ -3,33 +3,27 @@ const { Parser } = require('json2csv');
 
 // Get songs with optional filtering
 exports.getSongs = (req, res) => {
-    // Log that the function has been entered
     console.log("Entered getSongs function");
 
     const filter = req.query.filter || '';
-    // Log the filter value
     console.log("Filter value:", filter);
 
     const query = "SELECT * FROM Songs WHERE title LIKE ? AND deleted = 0";
     db.all(query, [`%${filter}%`], (err, results) => {
         if (err) {
-            // Log the error
             console.error("Database query error:", err.message);
             return res.status(500).json({ error: err.message });
         }
-        // Log the results
         console.log("Query results:", results);
-
         res.json(results);
     });
 };
 
-
 // Add a new song
 exports.addSong = (req, res) => {
-    const { title, albumId, duration } = req.body; // Include other fields as necessary
-    const query = "INSERT INTO Songs (title, albumId, duration, deleted) VALUES (?, ?, ?, 0)";
-    db.run(query, [title, albumId, duration], function(err) {
+    const { title, artist, duration, album } = req.body;
+    const query = "INSERT INTO Songs (title, artist, duration, album, deleted) VALUES (?, ?, ?, ?, 0)";
+    db.run(query, [title, artist, duration, album], function(err) {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
@@ -40,9 +34,9 @@ exports.addSong = (req, res) => {
 // Update a song
 exports.updateSong = (req, res) => {
     const songId = req.params.id;
-    const { title, albumId, duration } = req.body; // Include other fields as necessary
-    const query = "UPDATE Songs SET title = ?, albumId = ?, duration = ? WHERE SongID = ?";
-    db.run(query, [title, albumId, duration, songId], (err, results) => {
+    const { title, artist, duration, album } = req.body;
+    const query = "UPDATE Songs SET title = ?, artist = ?, duration = ?, album = ? WHERE SongID = ?";
+    db.run(query, [title, artist, duration, album, songId], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
