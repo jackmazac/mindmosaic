@@ -167,9 +167,9 @@ const Spotify = () => {
         return currentSongs.map((song, index) => (
             <div key={song.SongID || index} className="song-item">
                 <h3>{song.Title}</h3>
-                {/* Render other song details */}
+                <div>Artist: {song.Artist}</div>
+                <div>Album: {song.Album}</div>
                 <div>Duration: {song.Duration}</div>
-                {/* Add other details you want to display */}
                 <button onClick={() => handleDeleteSong(song.SongID)}>Delete</button>
                 <button onClick={() => openEditModal(song)}>Edit</button>
             </div>
