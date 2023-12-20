@@ -1,9 +1,9 @@
 -- Users Table
 CREATE TABLE Users (
     UserID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Username VARCHAR(255) NOT NULL UNIQUE,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL,
+    Username VARCHAR(30) NOT NULL UNIQUE,
+    Email VARCHAR(30) NOT NULL UNIQUE,
+    Password VARCHAR(30) NOT NULL,
     ProfileData TEXT
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE Content (
 -- Artists Table
 CREATE TABLE Artists (
     ArtistID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Name VARCHAR(255) NOT NULL,
+    Name VARCHAR(30) NOT NULL,
     Biography TEXT
 );
 
@@ -26,7 +26,7 @@ CREATE TABLE Artists (
 CREATE TABLE Albums (
     AlbumID INTEGER PRIMARY KEY AUTOINCREMENT,
     ArtistID INT NOT NULL,
-    Title VARCHAR(255) NOT NULL,
+    Title VARCHAR(30) NOT NULL,
     ReleaseDate DATE,
     FOREIGN KEY (ArtistID) REFERENCES Artists(ArtistID)
 );
@@ -35,10 +35,10 @@ CREATE TABLE Albums (
 CREATE TABLE Songs (
     SongID INTEGER PRIMARY KEY AUTOINCREMENT,
     AlbumID INT,
-    Title VARCHAR(255) NOT NULL,
-    Artist VARCHAR(255),
+    Title VARCHAR(30) NOT NULL,
+    Artist VARCHAR(30) NOT NULL,
     Duration TIME NOT NULL,
-    Album VARCHAR(255) NOT NULL,
+    Album VARCHAR(30) NOT NULL,
     deleted INTEGER DEFAULT 0,
     FOREIGN KEY (AlbumID) REFERENCES Albums(AlbumID)
 );
@@ -47,7 +47,7 @@ CREATE TABLE Songs (
 CREATE TABLE Playlists (
     PlaylistID INTEGER PRIMARY KEY AUTOINCREMENT,
     UserID INT NOT NULL,
-    Name VARCHAR(255) NOT NULL,
+    Name VARCHAR(30) NOT NULL,
     Description TEXT,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );

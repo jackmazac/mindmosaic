@@ -1,59 +1,41 @@
--- Insert data into Users
-INSERT INTO Users (Username, Email, Password)
-VALUES ('user1', 'user1@example.com', 'password1'),
-       ('user2', 'user2@example.com', 'password2'),
-       ('user3', 'user3@example.com', 'password3');
+-- Insert sample data into Users table
+INSERT INTO Users (Username, Email, Password, ProfileData) VALUES
+('john_doe', 'john.doe@example.com', 'password123', 'Johns Profile Info'),
+('jane_doe', 'jane.doe@example.com', 'password456', 'Janes Profile Info');
 
--- Insert data into Content
-INSERT INTO Content (UserID, Content)
-VALUES (1, 'Content from user1'),
-       (2, 'Content from user2'),
-       (3, 'Content from user3');
+-- Insert sample data into Content table
+INSERT INTO Content (UserID, Content) VALUES
+(1, 'Johns first post content here'),
+(2, 'Janes first post content here');
 
--- Insert data into Artists
-INSERT INTO Artists (Name, Biography)
-VALUES ('Artist 1', 'Biography for Artist 1'),
-       ('Artist 2', 'Biography for Artist 2');
+-- Insert sample data into Artists table
+INSERT INTO Artists (Name, Biography) VALUES
+('The Beatles', 'Popular English rock band formed in Liverpool in 1960.'),
+('Taylor Swift', 'American singer-songwriter known for narrative songs.');
 
--- Insert data into Albums
-INSERT INTO Albums (ArtistID, Title, ReleaseDate)
-VALUES (1, 'Album 1', '2022-01-01'),
-       (2, 'Album 2', '2022-02-02');
+-- Insert sample data into Albums table
+INSERT INTO Albums (ArtistID, Title, ReleaseDate) VALUES
+(1, 'Abbey Road', '1969-09-26'),
+(2, 'Folklore', '2020-07-24');
 
--- Insert data into Songs
-INSERT INTO Songs (AlbumID, Title, Duration)
-VALUES (1, 'Song 1', '00:03:30'),
-       (2, 'Song 2', '00:04:00');
+-- Insert sample data into Songs table
+INSERT INTO Songs (AlbumID, Title, Artist, Duration, Album) VALUES
+(1, 'Come Together', 'The Beatles', '04:18', 'Abbey Road'),
+(2, 'Cardigan', 'Taylor Swift', '04:00', 'Folklore');
 
--- Insert data into Playlists
-INSERT INTO Playlists (UserID, Name, Description)
-VALUES (1, 'Playlist 1', 'Description for Playlist 1'),
-       (2, 'Playlist 2', 'Description for Playlist 2');
+-- Insert sample data into Playlists table
+INSERT INTO Playlists (UserID, Name, Description) VALUES
+(1, 'Johns Favorites', 'A collection of Johns favorite songs'),
+(2, 'Janes Workout Playlist', 'Playlist for gym');
 
--- Insert data into Favorites
-INSERT INTO Favorites (UserID, SongID)
-VALUES (1, 1),
-       (2, 2);
+-- Insert sample data into Favorites table
+INSERT INTO Favorites (UserID, SongID) VALUES
+(1, 1),
+(2, 2);
 
--- Insert data into UserInteractions
-INSERT INTO UserInteractions (UserID_1, UserID_2, InteractionType)
-VALUES (1, 2, 'Follow'),
-       (2, 3, 'Follow'),
-       (3, 1, 'Follow'),
-       (1, 3, 'Follow'),
-       (2, 1, 'Follow');
+-- Insert sample data into UserInteractions table
+INSERT INTO UserInteractions (UserID_1, UserID_2, InteractionType) VALUES
+(1, 2, 'Follow'),
+(2, 1, 'Follow');
 
--- Additional sample data for Users
-INSERT INTO Users (Username, Email, Password)
-VALUES ('user4', 'user4@example.com', 'password4'),
-       ('user5', 'user5@example.com', 'password5');
-
--- Additional sample data for Content
-INSERT INTO Content (UserID, Content)
-VALUES (4, 'Content from user4'),
-       (5, 'Content from user5');
-
--- Additional sample data for Artists
-INSERT INTO Artists (Name, Biography)
-VALUES ('Artist 3', 'Biography for Artist 3'),
-       ('Artist 4', 'Biography for Artist 4');
+-- Note: Adjust the sample data as needed for your application context.
