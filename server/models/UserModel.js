@@ -9,20 +9,22 @@ const User = {
         const query = 'INSERT INTO users (username, password, email) VALUES (?, ?, ?)';
         const params = [user.username, user.password, user.email];
         db.run(query, params, function(err) {
-            function(err) {
+            if (err) {
                 callback(err, { id: this.lastID });
             }
+        });
         );
     },
 
-    login: function(User, callback) {
-        return db.query(
-            'SELECT * from users where username=? and password=?',
-            [User.username, User.password],
+    getByUsername: function(username, callback) {
+        return db.get(
+            'SELECT * from users where username=?',
+            [username],
             callback
         );
     },
 
+    // ... other methods ...
     getById: function(id, callback) {
         return db.get('SELECT * from users where id=?', [id], callback);
     },
@@ -35,6 +37,7 @@ const User = {
         );
     },
 
+    // ... other methods ...
     delete: function(id, callback) {
         return db.query('DELETE from users where id=?', [id], callback);
     },
