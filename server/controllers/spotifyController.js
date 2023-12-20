@@ -29,11 +29,11 @@ exports.getSongs = (req, res) => {
 exports.addSong = (req, res) => {
     const { title, albumId, duration } = req.body; // Include other fields as necessary
     const query = "INSERT INTO Songs (title, albumId, duration, deleted) VALUES (?, ?, ?, 0)";
-    db.run(query, [title, albumId, duration], (err, results) => {
+    db.run(query, [title, albumId, duration], function(err) {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.status(201).json({ message: 'Song added successfully', songId: results.insertId });
+        res.status(201).json({ message: 'Song added successfully', songId: this.lastID });
     });
 };
 
