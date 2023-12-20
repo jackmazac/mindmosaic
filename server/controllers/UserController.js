@@ -1,7 +1,7 @@
 const UserModel = require('../models/UserModel');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
-const secretKey = 'your-secret-key'; // Replace with your actual secret key
+const secretKey = 'secret';
 
 const UserController = {
     getAllUsers: function(req, res) {
@@ -65,17 +65,6 @@ const UserController = {
                 res.json(user);
             } else {
                 res.status(404).json({ error: 'User not found' });
-            }
-        });
-    },
-
-    addUser: function(req, res) {
-        // Assuming addUser is for admin purposes and doesn't require password hashing
-        UserModel.add(req.body, function(err, user) {
-            if (err) {
-                res.status(500).json({ error: 'Error adding user', details: err });
-            } else {
-                res.status(201).json({ message: 'User added successfully', userId: user.id });
             }
         });
     },
