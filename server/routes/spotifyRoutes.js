@@ -52,3 +52,8 @@ router.get('/exportData', (req, res, next) => {
 });
 
 module.exports = router;
+
+router.get('/exportData', (req, res, next) => {
+    console.log("GET /exportData route hit");
+    spotifyController.exportSongsData(req, res, next);
+});

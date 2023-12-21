@@ -74,4 +74,21 @@ exports.exportSongsData = (req, res) => {
             return res.status(500).json({ error: error.message });
         }
     });
+};// Export songs data as CSV
+exports.exportSongsData = (req, res) => {
+    const query = "SELECT * FROM Songs WHERE deleted = 0";
+    db.all(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        try {
+            const json2csvParser = new Parser();
+            const csv = json2csvParser.parse(results);
+            res.header('Content-Type', 'text/csv');
+            res.attachment('SongsData.csv');
+            return res.send(csv);
+        } catch (error) {
+            return res.status(500).json({ error: error.message });
+        }
+    });
 };
