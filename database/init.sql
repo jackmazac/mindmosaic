@@ -73,6 +73,33 @@ CREATE TABLE UserInteractions (
     PRIMARY KEY (UserID_1, UserID_2, InteractionType)
 );
 
+-- View for Songs with Artist and Album information
+CREATE VIEW SongDetails AS
+SELECT s.SongID, s.Title, s.Artist, s.Duration, s.Album, a.Name AS ArtistName, al.Title AS AlbumTitle
+FROM Songs s
+JOIN Albums al ON s.AlbumID = al.AlbumID
+JOIN Artists a ON al.ArtistID = a.ArtistID
+WHERE s.deleted = 0;
+
+-- View for User Favorite Songs with detailed information
+CREATE VIEW UserFavoriteSongs AS
+SELECT u.UserID, u.Username, s.SongID, s.Title AS SongTitle, a.Name AS ArtistName, al.Title AS AlbumTitle
+FROM Favorites f
+JOIN Users u ON f.UserID = u.UserID
+JOIN Songs s ON f.SongID = s.SongID
+JOIN Albums al ON s.AlbumID = al.AlbumID
+JOIN Artists a ON al.ArtistID = a.ArtistID
+WHERE s.deleted = 0;
+
+-- View for Playlist Songs with User information
+CREATE VIEW PlaylistSongDetails AS
+SELECT p.PlaylistID, p.Name AS PlaylistName, u.UserID, u.Username, s.SongID, s.Title AS SongTitle
+FROM Playlists p
+JOIN Users u ON p.UserID = u.UserID
+JOIN Favorites f ON p.PlaylistID = f.PlaylistID
+JOIN Songs s ON f.SongID = s.SongID
+WHERE s.deleted = 0;
+
 -- Indexes for optimization (examples)
 CREATE INDEX idx_artist_name ON Artists(Name);
 CREATE INDEX idx_album_title ON Albums(Title);
