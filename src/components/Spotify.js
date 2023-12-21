@@ -34,6 +34,28 @@ const Spotify = () => {
             });
     };
 
+    const handleExportData = () => {
+        setExporting(true);
+        axios({
+            url: `${apiUrl}/spotify/exportData`,
+            method: 'GET',
+            responseType: 'blob', // Important
+        }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'SongsData.csv'); // or any other extension
+            document.body.appendChild(link);
+            link.click();
+            window.URL.revokeObjectURL(url);
+            link.remove();
+            setExporting(false);
+        }).catch(() => {
+            setError('Could not export data.');
+            setExporting(false);
+        });
+    };
+
     const handleAddSongFormSubmit = (event) => {
         event.preventDefault();
         const newSong = {
@@ -109,6 +131,11 @@ const Spotify = () => {
                     </form>
                 </div>
             </div>
+            <div className="export-section">
+                <button onClick={handleExportData} disabled={exporting}>
+                    {exporting ? 'Exporting...' : 'Export Song Data'}
+                </button>
+            </div>
         );
     };
 
@@ -130,6 +157,11 @@ const Spotify = () => {
                         <button type="submit">Update Song</button>
                     </form>
                 </div>
+            </div>
+            <div className="export-section">
+                <button onClick={handleExportData} disabled={exporting}>
+                    {exporting ? 'Exporting...' : 'Export Song Data'}
+                </button>
             </div>
         );
     };
@@ -207,6 +239,11 @@ const Spotify = () => {
             <div>
                 {successMessage && <div className="success-message">{successMessage}</div>}
                 {error && <div className="error-message">{error}</div>}
+            </div>
+            <div className="export-section">
+                <button onClick={handleExportData} disabled={exporting}>
+                    {exporting ? 'Exporting...' : 'Export Song Data'}
+                </button>
             </div>
         );
     };
