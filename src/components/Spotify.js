@@ -8,7 +8,6 @@ const Spotify = () => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [exporting, setExporting] = useState(false);
     const [editingSong, setEditingSong] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -32,28 +31,6 @@ const Spotify = () => {
                 setError('Error fetching songs');
                 setLoading(false);
             });
-    };
-
-    const handleExportData = () => {
-        setExporting(true);
-        axios({
-            url: `${apiUrl}/spotify/exportData`,
-            method: 'GET',
-            responseType: 'blob', // Important
-        }).then((response) => {
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'SongsData.csv'); // or any other extension
-            document.body.appendChild(link);
-            link.click();
-            window.URL.revokeObjectURL(url);
-            link.remove();
-            setExporting(false);
-        }).catch(() => {
-            setError('Could not export data.');
-            setExporting(false);
-        });
     };
 
     const handleAddSongFormSubmit = (event) => {
@@ -131,11 +108,6 @@ const Spotify = () => {
                     </form>
                 </div>
             </div>
-            <div className="export-section">
-                <button onClick={handleExportData} disabled={exporting}>
-                    {exporting ? 'Exporting...' : 'Export Song Data'}
-                </button>
-            </div>
         );
     };
 
@@ -157,11 +129,6 @@ const Spotify = () => {
                         <button type="submit">Update Song</button>
                     </form>
                 </div>
-            </div>
-            <div className="export-section">
-                <button onClick={handleExportData} disabled={exporting}>
-                    {exporting ? 'Exporting...' : 'Export Song Data'}
-                </button>
             </div>
         );
     };
@@ -240,11 +207,6 @@ const Spotify = () => {
                 {successMessage && <div className="success-message">{successMessage}</div>}
                 {error && <div className="error-message">{error}</div>}
             </div>
-            <div className="export-section">
-                <button onClick={handleExportData} disabled={exporting}>
-                    {exporting ? 'Exporting...' : 'Export Song Data'}
-                </button>
-            </div>
         );
     };
 
@@ -256,11 +218,6 @@ const Spotify = () => {
                     {renderSuccessErrorMessages()}
                     {renderSongs()}
                     <Pagination />
-                <div className="export-section">
-                    <button onClick={handleExportData} disabled={exporting}>
-                        {exporting ? 'Exporting...' : 'Export Song Data'}
-                    </button>
-                </div>
                 </div>
                 <div className="spotify-right-column">
                     {renderAddSongForm()}
