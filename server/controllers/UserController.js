@@ -39,7 +39,7 @@ const UserController = {
             if (err) {
                 res.status(500).json({ error: 'Error logging in', details: err });
             } else if (user) {
-                const salt = user.Salt; // Ensure the property name matches the database column name
+                const salt = user.Salt;
                 crypto.pbkdf2(password, salt, 1000, 64, 'sha512', (err, derivedKey) => {
                     if (err) {
                         return res.status(500).json({ error: 'Error verifying password' });

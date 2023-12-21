@@ -18,12 +18,10 @@ const LoginPage = () => {
         event.preventDefault();
         axios.post(`${apiUrl}/users/login`, { username, password })
             .then(response => {
-                // Handle successful login here, e.g., store the token, redirect to a dashboard, etc.
                 console.log('Login successful:', response.data);
-                navigate('/dashboard'); // Redirect to the dashboard page or wherever appropriate
+                navigate('/dashboard'); 
             })
             .catch(error => {
-                // Handle login error here, e.g., show an error message to the user
                 console.error('Login error:', error.response ? error.response.data : error);
             });
     };

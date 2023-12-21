@@ -7,7 +7,10 @@ const RegisterPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
     const navigate = useNavigate();
+
+    const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -18,14 +21,16 @@ const RegisterPage = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('/api/users/register', { username, email, password })
+        axios.post(`${apiUrl}/users/register`, { username, email, password })
             .then(response => {
                 console.log('Registration successful:', response.data);
+                setSuccessMessage('Registration successful');
+                setError('');
                 navigate('/login'); // Redirect to the login page after successful registration
             })
-            .catch(error => {
-                setError('Registration failed. ' + (error.response && error.response.data && error.response.data.error ? error.response.data.error : 'Unknown error'));
-                console.error('Registration error:', error.response ? error.response.data : error);
+            .catch(err => {
+                console.error('Registration error:', err.response ? err.response.data : err);
+                setError('Registration failed. ' + (err.response && err.response.data && err.response.data.error ? err.response.data.error : 'Unknown error'));
             });
     };
 
@@ -33,10 +38,15 @@ const RegisterPage = () => {
         return error && <div className="error-message">{error}</div>;
     };
 
+    const renderSuccessMessage = () => {
+        return successMessage && <div className="success-message">{successMessage}</div>;
+    };
+
     return (
-        <div>
+        <div className="register-page">
             <h1>Register</h1>
             {renderErrorMessage()}
+            {renderSuccessMessage()}
             <form onSubmit={handleSubmit}>
                 <label>
                     Username:

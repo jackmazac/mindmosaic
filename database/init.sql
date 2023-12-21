@@ -4,6 +4,7 @@ CREATE TABLE Users (
     Username VARCHAR(30) NOT NULL UNIQUE,
     Email VARCHAR(30) NOT NULL UNIQUE,
     Password VARCHAR(30) NOT NULL,
+    Salt VARCHAR(64),
     ProfileData TEXT
 );
 
