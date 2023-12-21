@@ -47,7 +47,8 @@ const RegisterPage = () => {
             <h1>Register</h1>
             {renderErrorMessage()}
             {renderSuccessMessage()}
-            <form onSubmit={handleSubmit}>
+            <div className="form-container">
+            <form className="register-form" onSubmit={handleSubmit}>
                 <label>
                     Username:
                     <input type="text" name="username" value={username} onChange={handleInputChange} required />
@@ -60,8 +61,9 @@ const RegisterPage = () => {
                     Password:
                     <input type="password" name="password" value={password} onChange={handleInputChange} required />
                 </label>
-                <input type="submit" value="Register" />
+                <button type="submit" className="submit-button">Register</button>
             </form>
+        </div>
         </div>
     );
 }
