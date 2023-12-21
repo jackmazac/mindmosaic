@@ -1,0 +1,22 @@
+.testimonials-carousel {
+    background-color: #282828;
+    color: #fff;
+    padding: 40px;
+    text-align: center;
+}
+
+.carousel-item {
+    margin: 20px 0;
+    padding: 10px;
+    border-left: 3px solid #1db954;
+}
+
+.carousel-item p {
+    font-style: italic;
+}
+
+.carousel-item span {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}

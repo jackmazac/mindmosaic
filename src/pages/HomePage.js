@@ -10,6 +10,7 @@ import Footer from '../components/Footer';
 // import LatestContent from '../components/LatestContent';
 // import RegistrationCTA from '../components/RegistrationCTA';
 import './HomePage.css';
+import TestimonialsCarousel from '../components/TestimonialsCarousel';
 import HeroSection from '../components/HeroSection';
 
 const HomePage = () => {
@@ -26,7 +27,7 @@ const HomePage = () => {
             {/* <SpotifyIntegration /> */}
 
             {/* User Testimonials Carousel */}
-            {/* <TestimonialsCarousel /> */}
+            <TestimonialsCarousel />
 
             {/* Latest Content Display */}
             {/* <LatestContent /> */}
