@@ -1,5 +1,7 @@
 import React from 'react';
 import './HomePage.css';
+import Footer from '../components/Footer';
+
 // Import additional components as they are created
 // import HeroSection from '../components/HeroSection';
 // import FeaturesOverview from '../components/FeaturesOverview';
@@ -33,7 +35,6 @@ const HomePage = () => {
             {/* <RegistrationCTA /> */}
 
             {/* Enhanced Footer */}
-            <Footer />
             <Footer />
         </div>
     );
