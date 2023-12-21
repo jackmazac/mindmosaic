@@ -7,7 +7,7 @@ const User = {
 
     register: function(user, callback) {
         const query = 'INSERT INTO Users (Username, Email, Password, Salt) VALUES (?, ?, ?, ?)';
-        const params = [user.username, user.email, user.password, user.salt];
+        const params = [user.username, user.email, user.password, user.salt]; // Ensure that the salt is being passed correctly
         db.run(query, params, function(err) {
             if (err) {
                 callback(err);
