@@ -7,7 +7,8 @@ import './HomePage.css';
 // import TestimonialsCarousel from '../components/TestimonialsCarousel';
 // import LatestContent from '../components/LatestContent';
 // import RegistrationCTA from '../components/RegistrationCTA';
-import Footer from '../components/Footer';
+import './HomePage.css';
+import HeroSection from '../components/HeroSection';
 
 const HomePage = () => {
     return (
@@ -15,6 +16,7 @@ const HomePage = () => {
             {/* Hero Section */}
             {/* <HeroSection /> */}
 
+            <HeroSection />
             {/* Features Overview Section */}
             {/* <FeaturesOverview /> */}
 
@@ -31,6 +33,7 @@ const HomePage = () => {
             {/* <RegistrationCTA /> */}
 
             {/* Enhanced Footer */}
+            <Footer />
             <Footer />
         </div>
     );
