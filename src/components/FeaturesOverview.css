@@ -1,0 +1,33 @@
+/* FeaturesOverview.css */
+.features-overview {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 50px 0;
+    background-color: #121212;
+}
+
+.feature-card {
+    background: #1f1f1f;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-card h3 {
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #b3b3b3;
+    font-size: 14px;
+    line-height: 1.6;
+}
