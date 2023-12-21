@@ -4,6 +4,87 @@ body {
     font-family: Arial, sans-serif;
 }
 
+.hero-section {
+    background-image: url('/path/to/hero-background.jpg');
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.hero-headline {
+    font-size: 48px;
+    color: #fff;
+}
+
+.hero-cta-button {
+    padding: 10px 20px;
+    background-color: #1db954;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.features-overview {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 40px;
+}
+
+.feature-card {
+    background-color: #282828;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.spotify-integration-highlight {
+    background-color: #282828;
+    padding: 40px;
+    margin: 20px 0;
+}
+
+.testimonials-carousel {
+    background-color: #282828;
+    padding: 40px;
+}
+
+.latest-content {
+    padding: 40px;
+}
+
+.registration-cta {
+    background-color: #282828;
+    padding: 40px;
+    text-align: center;
+}
+
+.registration-cta-form {
+    margin-top: 20px;
+}
+
+.footer-expanded {
+    background-color: #282828;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-link {
+    color: #1db954;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
 .sidebar {
     width: 200px;
     height: 100vh;
