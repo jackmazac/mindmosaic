@@ -1,6 +1,6 @@
 /* HeroSection.css */
 .hero-section {
-    background-image: url('../assets/hero-background.jpg'); /* Path to hero background image */
+    background-image: url('../../src/assets/tunify_hero.png'); /* Updated path to hero background image */
     background-size: cover;
     background-position: center;
     height: 75vh; /* Adjust the height as needed */
