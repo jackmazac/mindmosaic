@@ -39,15 +39,6 @@ const UserController = {
             if (err) {
                 res.status(500).json({ error: 'Error logging in', details: err });
             } else if (user) {
-                const salt = user.Salt;
-                crypto.pbkdf2(password, salt, 1000, 64, 'sha512', (err, derivedKey) => {
-                    if (err) {
-                        return res.status(500).json({ error: 'Error verifying password' });
-                    }
-                    const hash = derivedKey.toString('hex');
-                    if (hash === user.password) {
-                        const token = jwt.sign({ userId: user.id, username: username }, secretKey, { expiresIn: '1h' });
-                        res.json({ message: 'Login successful', userId: user.id, token: token });
                 crypto.pbkdf2(password, user.Salt, 1000, 64, 'sha512', (err, hash) => {
                     if (err) {
                         return res.status(500).json({ error: 'Error verifying password' });
