@@ -7,7 +7,9 @@ const User = {
 
     register: function(user, callback) {
         const query = 'INSERT INTO Users (Username, Password, Salt, Email) VALUES (?, ?, ?, ?)';
-        const params = [user.username, user.password, user.salt, user.email];
+        // Ensure that the salt is a string and not undefined
+        const salt = user.salt || crypto.randomBytes(16).toString('hex');
+        const params = [user.username, user.password, salt, user.email];
         db.run(query, params, function(err) {
             if (err) {
                 callback(err);
