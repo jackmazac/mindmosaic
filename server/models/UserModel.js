@@ -6,10 +6,9 @@ const User = {
     },
 
     register: function(user, callback) {
-        const query = 'INSERT INTO Users (Username, Password, Salt, Email) VALUES (?, ?, ?, ?)';
-        // Ensure that the salt is a string and not undefined
-        const salt = user.salt || crypto.randomBytes(16).toString('hex');
-        const params = [user.username, user.password, salt, user.email];
+        const query = 'INSERT INTO Users (Username, Email, Password, Salt) VALUES (?, ?, ?, ?)';
+        const salt = crypto.randomBytes(16).toString('hex');
+        const params = [user.username, user.email, user.password, salt];
         db.run(query, params, function(err) {
             if (err) {
                 callback(err);
