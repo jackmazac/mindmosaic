@@ -5,13 +5,14 @@ body {
 }
 
 .hero-section {
-    background-image: url('/path/to/hero-background.jpg');
+    background-image: url('../../src/assets/tunify_hero.png');
     height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     text-align: center;
+    background-color: #282828; /* Match the nav bar and footer background color */
 }
 
 .hero-headline {
