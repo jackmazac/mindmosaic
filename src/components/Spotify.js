@@ -8,6 +8,7 @@ const Spotify = () => {
     const [error, setError] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [exporting, setExporting] = useState(false);
     const [editingSong, setEditingSong] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -218,6 +219,11 @@ const Spotify = () => {
                     {renderSuccessErrorMessages()}
                     {renderSongs()}
                     <Pagination />
+                <div className="export-section">
+                    <button onClick={handleExportData} disabled={exporting}>
+                        {exporting ? 'Exporting...' : 'Export Song Data'}
+                    </button>
+                </div>
                 </div>
                 <div className="spotify-right-column">
                     {renderAddSongForm()}
