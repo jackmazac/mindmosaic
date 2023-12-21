@@ -48,6 +48,13 @@ const UserController = {
                     if (hash === user.password) {
                         const token = jwt.sign({ userId: user.id, username: username }, secretKey, { expiresIn: '1h' });
                         res.json({ message: 'Login successful', userId: user.id, token: token });
+                crypto.pbkdf2(password, user.Salt, 1000, 64, 'sha512', (err, hash) => {
+                    if (err) {
+                        return res.status(500).json({ error: 'Error verifying password' });
+                    }
+                    if (hash.toString('hex') === user.Password) {
+                        const token = jwt.sign({ userId: user.UserID, username: username }, secretKey, { expiresIn: '1h' });
+                        res.json({ message: 'Login successful', token: token });
                     } else {
                         res.status(401).json({ error: 'Invalid credentials' });
                     }
