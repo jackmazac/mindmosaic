@@ -7,8 +7,7 @@ const User = {
 
     register: function(user, callback) {
         const query = 'INSERT INTO Users (Username, Email, Password, Salt) VALUES (?, ?, ?, ?)';
-        const salt = crypto.randomBytes(16).toString('hex');
-        const params = [user.username, user.email, user.password, salt];
+        const params = [user.username, user.email, user.password, user.salt];
         db.run(query, params, function(err) {
             if (err) {
                 callback(err);
