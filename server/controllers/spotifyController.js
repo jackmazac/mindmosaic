@@ -92,3 +92,82 @@ exports.exportSongsData = (req, res) => {
         }
     });
 };
+// Get song statistics with aggregation/group-by
+exports.getSongStatistics = (req, res) => {
+    const query = "SELECT Album, COUNT(*) as NumberOfSongs FROM Songs GROUP BY Album";
+    db.all(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+};
+// Get albums with the top 5 longest duration songs
+exports.getAlbumsWithTopSongs = (req, res) => {
+    const query = `
+        SELECT DISTINCT Album
+        FROM Songs
+        WHERE SongID IN (
+            SELECT SongID
+            FROM Songs
+            ORDER BY Duration DESC
+            LIMIT 5
+        )
+    `;
+    db.all(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+};
+// Get detailed information by joining Artists, Albums, and Songs tables
+exports.getArtistAlbumSongInfo = (req, res) => {
+    const query = `
+        SELECT Artists.Name as ArtistName, Albums.Title as AlbumTitle, Songs.Title as SongTitle
+        FROM Songs
+        JOIN Albums ON Songs.AlbumID = Albums.AlbumID
+        JOIN Artists ON Albums.ArtistID = Artists.ArtistID
+    `;
+    db.all(query, (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+};
+
+// Get user playlists and the songs in them by joining Users, Playlists, and Songs tables
+exports.getUserPlaylistSongs = (req, res) => {
+    const userId = req.params.userId;
+    const query = `
+        SELECT Playlists.Name as PlaylistName, Songs.Title as SongTitle
+        FROM Playlists
+        JOIN Favorites ON Playlists.PlaylistID = Favorites.PlaylistID
+        JOIN Songs ON Favorites.SongID = Songs.SongID
+        WHERE Playlists.UserID = ?
+    `;
+    db.all(query, [userId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: err.message });
+        }
+        res.json(results);
+    });
+};
+// Add a new song with transaction handling
+exports.addSongWithTransaction = (req, res) => {
+    const { title, artist, duration, album } = req.body;
+    const query = "INSERT INTO Songs (title, artist, duration, album, deleted) VALUES (?, ?, ?, ?, 0)";
+    db.serialize(() => {
+        db.run("BEGIN TRANSACTION");
+        db.run(query, [title, artist, duration, album], function(err) {
+            if (err) {
+                db.run("ROLLBACK");
+                console.error("Error adding song with transaction:", err);
+                return res.status(500).json({ error: "Error adding song: " + err.message });
+            }
+            db.run("COMMIT");
+            res.status(201).json({ message: 'Song added successfully with transaction', songId: this.lastID });
+        });
+    });
+};

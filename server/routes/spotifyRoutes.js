@@ -57,3 +57,28 @@ router.get('/exportData', (req, res, next) => {
     console.log("GET /exportData route hit");
     spotifyController.exportSongsData(req, res, next);
 });
+
+router.get('/songStatistics', (req, res, next) => {
+    console.log("GET /songStatistics route hit");
+    spotifyController.getSongStatistics(req, res, next);
+});
+
+router.get('/albumsWithTopSongs', (req, res, next) => {
+    console.log("GET /albumsWithTopSongs route hit");
+    spotifyController.getAlbumsWithTopSongs(req, res, next);
+});
+
+router.get('/artistAlbumSongInfo', (req, res, next) => {
+    console.log("GET /artistAlbumSongInfo route hit");
+    spotifyController.getArtistAlbumSongInfo(req, res, next);
+});
+
+router.get('/userPlaylistSongs/:userId', (req, res, next) => {
+    console.log("GET /userPlaylistSongs/:userId route hit");
+    spotifyController.getUserPlaylistSongs(req, res, next);
+});
+
+router.post('/songs/addWithTransaction', songValidationRules, validate, (req, res, next) => {
+    console.log("POST /songs/addWithTransaction route hit");
+    spotifyController.addSongWithTransaction(req, res, next);
+});
